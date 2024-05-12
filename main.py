@@ -73,6 +73,10 @@ class Window(QtWidgets.QMainWindow, ui_main_window.Ui_MainWindow):
 
     def start_quiz(self):
         print(self.quiz_list)
+        print(self.quiz_list)
+        print(self.quiz_list)
+        print(self.quiz_list)
+        print(self.quiz_list)
 
 
 def main():
