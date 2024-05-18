@@ -1,8 +1,11 @@
 import sys  # sys нужен для передачи argv в QApplication
+import time
+
 from PyQt5 import QtWidgets
 
 import ui_main_window  # Это наш конвертированный файл дизайна
 from movie_widget import MovieWidget
+from widget_choose_count_of_members import WidgetCountOfMembers
 
 
 class Window(QtWidgets.QMainWindow, ui_main_window.Ui_MainWindow):
@@ -16,20 +19,24 @@ class Window(QtWidgets.QMainWindow, ui_main_window.Ui_MainWindow):
 
         # Стили
         # Стиль кнопок у tab_widget
-        self.tab_search.setStyleSheet("""
-                QTabBar {
-                    background-color: #777777;
-                    border: 2px solid #C4C4C3;
-                    border-bottom-color: #C2C7CB; /* same as the pane color */
-                    border-top-left-radius: 4px;
-                    border-top-right-radius: 4px;
-                    min-width: 8ex;
-                    padding: 2px;
-                }
-                """)
+        # self.tab_search.setStyleSheet("""
+        #         QTabBar {
+        #             background-color: #777777;
+        #             border: 2px solid #C4C4C3;
+        #             border-bottom-color: #C2C7CB; /* same as the pane color */
+        #             border-top-left-radius: 4px;
+        #             border-top-right-radius: 4px;
+        #             min-width: 8ex;
+        #             padding: 2px;
+        #         }
+        #         """)
+        self.btn_start_quiz.setStyleSheet("color: rgb(100, 100, 100)")
 
         # Создание списка для опроса
         self.quiz_list = []
+
+        # Создание переменной для хранения количества участников (понадобится потом)
+        self.count_of_members = 0
 
         # Подключение действий к кнопкам
         self.btn_search.clicked.connect(self.search)
@@ -57,7 +64,7 @@ class Window(QtWidgets.QMainWindow, ui_main_window.Ui_MainWindow):
             if movie_name in self.quiz_list:
                 continue
 
-            movie_widget = MovieWidget(self.quiz_list, movie_name)
+            movie_widget = MovieWidget(self.quiz_list, self.btn_start_quiz,movie_name)
             self.search_movie_widgets_layout.addWidget(movie_widget)
 
         # Если не нашлось ни одного фильма
@@ -72,11 +79,35 @@ class Window(QtWidgets.QMainWindow, ui_main_window.Ui_MainWindow):
             item.widget().deleteLater()
 
     def start_quiz(self):
-        print(self.quiz_list)
-        print(self.quiz_list)
-        print(self.quiz_list)
-        print(self.quiz_list)
-        print(self.quiz_list)
+        # Удаление основного окна
+        while self.horizontalLayout.count() > 0:
+            item = self.horizontalLayout.takeAt(0)
+            item.widget().deleteLater()
+
+        # Пауза во время смены страниц (для ЭсТеТиКи)
+        time.sleep(0.25)
+
+        # Переход на новую страницу
+        widget_count_of_members = WidgetCountOfMembers()
+        self.horizontalLayout.addWidget(widget_count_of_members)
+
+        # Привязка кнопки из widget_count_of_members основному окну
+        self.btn_next_window = widget_count_of_members.ui.btn_next_window
+        self.btn_next_window.clicked.connect(lambda: self.go_to_next_window(widget_count_of_members))
+
+    def go_to_next_window(self, widget_count_of_members: WidgetCountOfMembers):
+        # Передача приложению количества участников
+        self.count_of_members = widget_count_of_members.ui.spinBox_count_of_members.value()
+
+        # Удаление текущей страницы
+        while self.horizontalLayout.count() > 0:
+            item = self.horizontalLayout.takeAt(0)
+            item.widget().deleteLater()
+
+        # Немного ЭсТеТиКи
+        time.sleep(0.25)
+
+        # TODO: продолжить
 
 
 def main():

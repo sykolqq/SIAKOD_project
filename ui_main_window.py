@@ -182,7 +182,7 @@ class Ui_MainWindow(object):
         self.search_scrollArea.setWidget(self.scrollAreaWidgetContents_3)
         self.verticalLayout.addWidget(self.search_scrollArea)
         self.btn_start_quiz = QtWidgets.QPushButton(self.tab_search)
-        self.btn_start_quiz.setEnabled(True)
+        self.btn_start_quiz.setEnabled(False)
         self.btn_start_quiz.setStyleSheet("background-color: rgb(85, 85, 85);")
         self.btn_start_quiz.setObjectName("btn_start_quiz")
         self.verticalLayout.addWidget(self.btn_start_quiz)
