@@ -4,36 +4,25 @@ import time
 from PyQt5 import QtWidgets
 
 import ui_main_window  # Это наш конвертированный файл дизайна
+
 from movie_widget import MovieWidget
 from widget_choose_count_of_members import WidgetCountOfMembers
+from widget_quiz_round import WidgetQuizRound
 
 
 class Window(QtWidgets.QMainWindow, ui_main_window.Ui_MainWindow):
     def __init__(self):
-        # Это здесь нужно для доступа к переменным, методам
-        # и т.д. в файле design.py
         super().__init__()
         self.setupUi(self)  # Это нужно для инициализации нашего дизайна
 
         # Мой код
 
         # Стили
-        # Стиль кнопок у tab_widget
-        # self.tab_search.setStyleSheet("""
-        #         QTabBar {
-        #             background-color: #777777;
-        #             border: 2px solid #C4C4C3;
-        #             border-bottom-color: #C2C7CB; /* same as the pane color */
-        #             border-top-left-radius: 4px;
-        #             border-top-right-radius: 4px;
-        #             min-width: 8ex;
-        #             padding: 2px;
-        #         }
-        #         """)
         self.btn_start_quiz.setStyleSheet("color: rgb(100, 100, 100)")
 
         # Создание списка для опроса
         self.quiz_list = []
+        self.count_of_rounds = len(self.quiz_list)
 
         # Создание переменной для хранения количества участников (понадобится потом)
         self.count_of_members = 0
@@ -64,7 +53,7 @@ class Window(QtWidgets.QMainWindow, ui_main_window.Ui_MainWindow):
             if movie_name in self.quiz_list:
                 continue
 
-            movie_widget = MovieWidget(self.quiz_list, self.btn_start_quiz,movie_name)
+            movie_widget = MovieWidget(self.quiz_list, self.btn_start_quiz, movie_name)
             self.search_movie_widgets_layout.addWidget(movie_widget)
 
         # Если не нашлось ни одного фильма
@@ -79,6 +68,8 @@ class Window(QtWidgets.QMainWindow, ui_main_window.Ui_MainWindow):
             item.widget().deleteLater()
 
     def start_quiz(self):
+        # TODO: добавить копирование layout'a перед удалением
+
         # Удаление основного окна
         while self.horizontalLayout.count() > 0:
             item = self.horizontalLayout.takeAt(0)
@@ -98,16 +89,40 @@ class Window(QtWidgets.QMainWindow, ui_main_window.Ui_MainWindow):
     def go_to_next_window(self, widget_count_of_members: WidgetCountOfMembers):
         # Передача приложению количества участников
         self.count_of_members = widget_count_of_members.ui.spinBox_count_of_members.value()
+        # Передача количества раундов
+        self.count_of_rounds = len(self.quiz_list) - 1
+
+        # Начало опроса
+        self.quiz_rounds(1)
+        # Конец опроса
+
+    def quiz_rounds(self, current_round: int):
+        # Если подошел к концу опрос
+        if current_round - 1 == self.count_of_rounds:
+            self.show_quiz_results()
+            return
 
         # Удаление текущей страницы
         while self.horizontalLayout.count() > 0:
             item = self.horizontalLayout.takeAt(0)
             item.widget().deleteLater()
-
         # Немного ЭсТеТиКи
         time.sleep(0.25)
 
-        # TODO: продолжить
+        # Изменение полей раунда
+        text_current_round = "РАУНД " + str(current_round) + "/" + str(self.count_of_rounds)
+        # Создание добавление текущего раунда
+        widget_quiz_round = WidgetQuizRound(text_current_round, self.quiz_list.pop(0), self.quiz_list[0])
+        self.horizontalLayout.addWidget(widget_quiz_round)
+
+        widget_quiz_round.ui.btn_next_round.clicked.connect(lambda: self.quiz_rounds(current_round + 1))
+
+    def show_quiz_results(self):
+        while self.horizontalLayout.count() > 0:
+            item = self.horizontalLayout.takeAt(0)
+            item.widget().deleteLater()
+
+        # TODO: сделать страницу с результатами
 
 
 def main():
