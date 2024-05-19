@@ -43,7 +43,7 @@ class Window(QtWidgets.QMainWindow, ui_main_window.Ui_MainWindow):
         if search_information != "":
             if len(search_information) > 30:
                 # TODO: Поменять на 62 или 50
-                search_information = search_information[:30]
+                search_information = search_information[:30] + "..."
             self.add_movie_widget(search_information)
 
     def delete_text(self):
@@ -51,14 +51,25 @@ class Window(QtWidgets.QMainWindow, ui_main_window.Ui_MainWindow):
 
     def add_movie_widget(self, search_information):
         # TODO: вместо цикла найти по search_info фильмы (может быть меньше 5)
-        for i in range(1, 6):
-            movie_name = search_information + " " + str(i)
-            # Проверка: есть ли данный фильм уже в quiz_list
-            if movie_name in self.quiz_list:
-                continue
+        # for i in range(1, 6):
+        #     movie_name = search_information + " " + str(i)
+        #     # Проверка: есть ли данный фильм уже в quiz_list
+        #     if movie_name in self.quiz_list:
+        #         continue
+        #
+        #     movie_widget = MovieWidget(self.quiz_list, movie_name)
+        #     self.search_movie_widgets_layout.addWidget(movie_widget)
+        try:
+            database = open("mini_database_title.txt", encoding="utf-8")
+            self.data = database.readlines()
+        finally:
+            database.close()
 
-            movie_widget = MovieWidget(self.quiz_list, movie_name)
-            self.search_movie_widgets_layout.addWidget(movie_widget)
+        for line in self.data:
+            searching = line.find(search_information)
+            if searching != -1 and line not in self.quiz_list:
+                movie_name = line.split('\t')[2]
+                self.search_movie_widgets_layout.addWidget(MovieWidget(self.quiz_list, movie_name))
 
         # Если не нашлось ни одного фильма
         if self.search_movie_widgets_layout.count() == 0:
