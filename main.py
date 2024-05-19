@@ -93,6 +93,22 @@ class Window(QtWidgets.QMainWindow, ui_main_window.Ui_MainWindow):
         self.count_of_rounds = len(self.quiz_list) - 1
 
         # Начало опроса
+        # TODO: ПЕРЕДЕЛАТЬ ЭТУ ЧАСТЬ, ОНА НУЖНА ДЛЯ ПРИМЕРА
+        self.table = QtWidgets.QTableWidget(self)
+        self.table.setRowCount(len(self.quiz_list))
+        self.table.setColumnCount(len(self.quiz_list))
+
+        self.table.setHorizontalHeaderLabels(self.quiz_list)
+        self.table.setVerticalHeaderLabels(self.quiz_list)
+
+        self.table.setStyleSheet('''QTableView QTableCornerButton::section {
+                                                background-color: #ccccff;
+                                            }'''"QHeaderView::section { background-color: #ccccff; }")
+
+        self.data = [[0] * len(self.quiz_list) for _ in range(len(self.quiz_list))]
+        for i in range(len(self.quiz_list)):
+            self.data[i][i] = 1
+
         self.quiz_rounds(1)
         # Конец опроса
 
@@ -123,6 +139,14 @@ class Window(QtWidgets.QMainWindow, ui_main_window.Ui_MainWindow):
             item.widget().deleteLater()
 
         # TODO: сделать страницу с результатами
+        # Пока тестовый вид
+        # Заполнение таблицы данными
+        for i, row in enumerate(self.data):
+            for j, value in enumerate(row):
+                item = QtWidgets.QTableWidgetItem(str(value))
+                self.table.setItem(i, j, item)
+
+        self.horizontalLayout.addWidget(self.table)
 
 
 def main():
