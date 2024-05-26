@@ -2,9 +2,11 @@ from PyQt5.QtWidgets import QWidget, QPushButton
 
 from ui.ui_movie_widget import Ui_MovieWidget
 
+from Movie import Movie
+
 
 class MovieWidget(QWidget):
-    def __init__(self, quiz_list: list, btn_start_quiz: QPushButton, movie_title: str, parent=None):
+    def __init__(self, quiz_list: list, btn_start_quiz: QPushButton, movie: Movie, parent=None):
         # TODO: добавить поле, которое будет обладать всеми полями фильма
         # "Приклеивание" внешних элементов приложения
         self.quiz_list = quiz_list
@@ -14,8 +16,8 @@ class MovieWidget(QWidget):
         super(MovieWidget, self).__init__(parent)
         self.ui = Ui_MovieWidget()
         self.ui.setupUi(self)
-        self.movie_title = movie_title
-        self.ui.groupBox.setTitle(movie_title)
+        self.movie_title = movie.title
+        self.ui.groupBox.setTitle(movie.title)
         self.ui.btn_add_to_quiz.clicked.connect(self.add_to_quiz)
 
     def add_to_quiz(self):

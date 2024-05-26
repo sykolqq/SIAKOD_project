@@ -11,6 +11,8 @@ from widget_quiz_round import WidgetQuizRound
 
 import sqlite3
 
+from Movie import Movie
+
 
 class Window(QtWidgets.QMainWindow, ui_main_window.Ui_MainWindow):
     def __init__(self):
@@ -41,7 +43,6 @@ class Window(QtWidgets.QMainWindow, ui_main_window.Ui_MainWindow):
         # finally:
         #     database.close()
 
-
     def search(self):
         self.clear_area()
         search_information = self.label_search.text()
@@ -57,20 +58,35 @@ class Window(QtWidgets.QMainWindow, ui_main_window.Ui_MainWindow):
 
     def add_movie_widget(self, search_information):
         # Подключение к БД
-        db_title = sqlite3.connect("mini_database/title.akas.db")
+        db_title = sqlite3.connect("mini_database/title.db")
         db_title_cursor = db_title.cursor()
 
         # Поиск по названию
         db_title_cursor.execute(f'''
-        select titleId, title, region
-            from title_akas
-            where title like '%{search_information}%'
+        SELECT
+        	akas.titleId,
+        	akas.title,
+        	akas.region,
+        	basics.genres,
+        	crew.directors,
+        	ratings.averageRating
+        FROM
+        	title_akas akas
+        JOIN
+        	title_basics basics ON akas.titleId = basics.titleId,
+        	title_crew crew ON akas.titleId = crew.titleId,
+        	title_ratings ratings ON akas.titleId = ratings.titleId
+        WHERE
+        	akas.title LIKE '%{search_information}%'
         ''')
         search_result = db_title_cursor.fetchall()
         print(search_result)
 
         for movie in search_result:
-            self.search_movie_widgets_layout.addWidget(MovieWidget(self.quiz_list, self.btn_start_quiz, movie[1]))
+            if movie[1] not in self.quiz_list:
+                self.search_movie_widgets_layout.addWidget(
+                    MovieWidget(self.quiz_list, self.btn_start_quiz,
+                                Movie(movie[0], movie[1], movie[2], movie[3].split(","), movie[4], movie[5])))
 
         # Закрыть подключенную БД
         db_title.close()
