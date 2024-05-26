@@ -6,6 +6,7 @@ venv
 __pycache__
 old_files
 test.py
+test
 database
 mini_database
 .ui

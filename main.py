@@ -9,6 +9,8 @@ from movie_widget import MovieWidget
 from widget_choose_count_of_members import WidgetCountOfMembers
 from widget_quiz_round import WidgetQuizRound
 
+import sqlite3
+
 
 class Window(QtWidgets.QMainWindow, ui_main_window.Ui_MainWindow):
     def __init__(self):
@@ -32,6 +34,14 @@ class Window(QtWidgets.QMainWindow, ui_main_window.Ui_MainWindow):
         self.btn_delete.clicked.connect(self.delete_text)
         self.btn_start_quiz.clicked.connect(self.start_quiz)
 
+        # Инициализация БД
+        # try:
+        #     database = open("mini_database/title.akas.txt", encoding="utf-8")
+        #     self.data = database.readlines()
+        # finally:
+        #     database.close()
+
+
     def search(self):
         self.clear_area()
         search_information = self.label_search.text()
@@ -46,17 +56,24 @@ class Window(QtWidgets.QMainWindow, ui_main_window.Ui_MainWindow):
         self.label_search.setText("")
 
     def add_movie_widget(self, search_information):
-        try:
-            database = open("mini_database/title.akas.txt", encoding="utf-8")
-            self.data = database.readlines()
-        finally:
-            database.close()
+        # Подключение к БД
+        db_title = sqlite3.connect("mini_database/title.akas.db")
+        db_title_cursor = db_title.cursor()
 
-        for line in self.data:
-            searching = line.find(search_information)
-            movie_name = line.split('\t')[2]
-            if searching != -1 and movie_name not in self.quiz_list:
-                self.search_movie_widgets_layout.addWidget(MovieWidget(self.quiz_list, self.btn_start_quiz, movie_name))
+        # Поиск по названию
+        db_title_cursor.execute(f'''
+        select titleId, title, region
+            from title_akas
+            where title like '%{search_information}%'
+        ''')
+        search_result = db_title_cursor.fetchall()
+        print(search_result)
+
+        for movie in search_result:
+            self.search_movie_widgets_layout.addWidget(MovieWidget(self.quiz_list, self.btn_start_quiz, movie[1]))
+
+        # Закрыть подключенную БД
+        db_title.close()
 
         # Если не нашлось ни одного фильма
         if self.search_movie_widgets_layout.count() == 0:
