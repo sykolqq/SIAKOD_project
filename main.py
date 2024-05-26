@@ -109,36 +109,58 @@ class Window(QtWidgets.QMainWindow, ui_main_window.Ui_MainWindow):
         for i in range(len(self.quiz_list)):
             self.data[i][i] = 1
 
-        self.quiz_rounds(1)
+        self.start_quiz_rounds()
         # Конец опроса
 
-    def quiz_rounds(self, current_round: int):
-        # Если подошел к концу опрос
-        if current_round - 1 == self.count_of_rounds:
-            self.show_quiz_results()
-            return
+    def start_quiz_rounds(self):
+        while self.horizontalLayout.count() > 0:
+            item = self.horizontalLayout.takeAt(0)
+            item.widget().deleteLater()
+        # Немного ЭсТеТиКи
+        time.sleep(0.25)
+        # Изменение полей раунда
+        current_round = 1
+        text_current_round = "РАУНД " + str(current_round) + "/" + str(self.count_of_rounds)
 
-        # Удаление текущей страницы
+        # Создание добавление текущего раунда
+        widget_quiz_round = WidgetQuizRound(text_current_round, self.quiz_list[current_round - 1],
+                                            self.quiz_list[current_round])
+        self.horizontalLayout.addWidget(widget_quiz_round)
+        widget_quiz_round.ui.btn_next_round.clicked.connect(
+            lambda: self.quiz_round(current_round + 1, widget_quiz_round.ui.slider.value()))
+
+    def quiz_round(self, current_round: int, value_of_slider: int):
         while self.horizontalLayout.count() > 0:
             item = self.horizontalLayout.takeAt(0)
             item.widget().deleteLater()
         # Немного ЭсТеТиКи
         time.sleep(0.25)
 
+        # Обработка значений слайдера
+        if value_of_slider == 10:
+            value_of_slider = 1
+        else:
+            value_of_slider = (11 - value_of_slider) if (value_of_slider < 10) else ((value_of_slider - 9) ** -1)
+
+        self.data[current_round - 2][current_round - 1] = round(value_of_slider, 2)
+        self.data[current_round - 1][current_round - 2] = round(value_of_slider ** -1, 2)
+
+        if current_round - 1 == self.count_of_rounds:
+            self.show_quiz_results()
+            return
         # Изменение полей раунда
         text_current_round = "РАУНД " + str(current_round) + "/" + str(self.count_of_rounds)
-        # Создание добавление текущего раунда
-        widget_quiz_round = WidgetQuizRound(text_current_round, self.quiz_list.pop(0), self.quiz_list[0])
-        self.horizontalLayout.addWidget(widget_quiz_round)
 
-        widget_quiz_round.ui.btn_next_round.clicked.connect(lambda: self.quiz_rounds(current_round + 1))
+        # Создание добавление текущего раунда
+        widget_quiz_round = WidgetQuizRound(text_current_round, self.quiz_list[current_round - 1],
+                                            self.quiz_list[current_round])
+        self.horizontalLayout.addWidget(widget_quiz_round)
+        widget_quiz_round.ui.btn_next_round.clicked.connect(
+            lambda: self.quiz_round(current_round + 1, widget_quiz_round.ui.slider.value()))
 
     def show_quiz_results(self):
-        while self.horizontalLayout.count() > 0:
-            item = self.horizontalLayout.takeAt(0)
-            item.widget().deleteLater()
-
         # TODO: сделать страницу с результатами
+        list_of_results = self.paired_comparison_algorithm()
         # Пока тестовый вид
         # Заполнение таблицы данными
         for i, row in enumerate(self.data):
@@ -147,6 +169,72 @@ class Window(QtWidgets.QMainWindow, ui_main_window.Ui_MainWindow):
                 self.table.setItem(i, j, item)
 
         self.horizontalLayout.addWidget(self.table)
+
+        # Таблица с результатами
+        table_of_results = QtWidgets.QTableWidget(self)
+        table_of_results.setRowCount(len(self.quiz_list))
+        table_of_results.setColumnCount(1)
+        #
+        table_of_results.setVerticalHeaderLabels(self.quiz_list)
+        table_of_results.setHorizontalHeaderLabels(["Результат"])
+        # table_of_results.setHorizontalHeaderLabels()
+
+        table_of_results.setStyleSheet('''QTableView QTableCornerButton::section {
+                                                        background-color: #ccccff;
+                                                    }'''"QHeaderView::section { background-color: #ccccff; }")
+
+        for i, value in enumerate(list_of_results):
+            item = QtWidgets.QTableWidgetItem(str(value))
+            table_of_results.setItem(i, 0, item)
+
+        self.horizontalLayout.addWidget(table_of_results)
+
+    def paired_comparison_algorithm(self):
+        table = self.data
+        if len(table) == 2:
+            return
+
+        n = len(table)
+
+        # Первый шаг - обработка первой строки матрицы
+        for i in range(2, n):
+            sum_of_cells = (table[0][i - 1] * table[i - 1][i]) if (table[0][i - 1] * table[i - 1][i] < 11) else 11
+            if sum_of_cells > 11:
+                sum_of_cells = 11
+            table[0][i] = round(sum_of_cells, 2)
+            table[i][0] = round(sum_of_cells ** -1, 2)
+
+        # Второй шаг - заполнение пустых ячеек матрицы парных сравнений
+        for i in range(n // 2 + 1):
+            for j in range(n):
+                if table[i][j] != 0:
+                    continue
+                # Код валиден, так как на первом шаге все фильмы сравнились с первым
+                cell_i_j = table[i][0] * table[0][j] if table[i][0] * table[0][j] < 11 else 11
+                cell_j_i = table[j][0] * table[0][i] if table[j][0] * table[0][i] < 11 else 11
+                table[i][j] = round(cell_i_j, 2)
+                table[j][i] = round(cell_j_i, 2)
+
+        # Третий шаг - нормализация данных
+        list_of_row_multi = []
+        sum_of_multiply = 0
+        for i in range(n):
+            multiply = 1
+            for j in range(n):
+                multiply *= table[i][j]
+            multiply = multiply ** (1 / n)
+            list_of_row_multi.append(multiply)
+            sum_of_multiply += multiply
+
+        # Четвертый шаг - результаты каждого фильма
+        list_results = []
+        for i in range(n):
+            list_results.append(list_of_row_multi[i] / sum_of_multiply)
+
+        # Округление результатов
+        for i in range(n):
+            list_results[i] = round(list_results[i], 2)
+        return list_results
 
 
 def main():

@@ -164,8 +164,8 @@ QGroupBox QLabel {
 "QSlider::handle:horizontal:pressed {\n"
 "    background-color: #9966CC;\n"
 "}")
-        self.slider.setMaximum(100)
-        self.slider.setProperty("value", 50)
+        self.slider.setMaximum(20)
+        self.slider.setProperty("value", 10)
         self.slider.setOrientation(QtCore.Qt.Horizontal)
         self.slider.setObjectName("slider")
         self.layout_which_movie_better.addWidget(self.slider)
@@ -210,9 +210,9 @@ QGroupBox QLabel {
         self.label_movie2_genre.setText(_translate("WidgetQuizRound", "Жанр: NaN"))
         self.label_movie2_rating.setText(_translate("WidgetQuizRound", "Рейтинг: NaN"))
         self.label_which_movie_better.setText(_translate("WidgetQuizRound", "КАКОЙ ФИЛЬМ ЛУЧШЕ?"))
-        self.label_left_100.setText(_translate("WidgetQuizRound", "100%"))
-        self.label_center_0.setText(_translate("WidgetQuizRound", "0%"))
-        self.label_right_100.setText(_translate("WidgetQuizRound", "100%"))
+        self.label_left_100.setText(_translate("WidgetQuizRound", "10"))
+        self.label_center_0.setText(_translate("WidgetQuizRound", "Одинаково"))
+        self.label_right_100.setText(_translate("WidgetQuizRound", "10"))
         self.btn_next_round.setText(_translate("WidgetQuizRound", "ДАЛЕЕ"))
 
 
