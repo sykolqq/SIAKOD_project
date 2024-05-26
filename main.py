@@ -56,7 +56,7 @@ class Window(QtWidgets.QMainWindow, ui_main_window.Ui_MainWindow):
             searching = line.find(search_information)
             movie_name = line.split('\t')[2]
             if searching != -1 and movie_name not in self.quiz_list:
-                self.search_movie_widgets_layout.addWidget(MovieWidget(self.quiz_list, movie_name))
+                self.search_movie_widgets_layout.addWidget(MovieWidget(self.quiz_list, self.btn_start_quiz, movie_name))
 
         # Если не нашлось ни одного фильма
         if self.search_movie_widgets_layout.count() == 0:
