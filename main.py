@@ -80,16 +80,15 @@ class Window(QtWidgets.QMainWindow, ui_main_window.Ui_MainWindow):
         	akas.title LIKE '%{search_information}%'
         ''')
         search_result = db_title_cursor.fetchall()
-        print(search_result)
+
+        # Закрыть подключенную БД
+        db_title.close()
 
         for movie in search_result:
             if movie[1] not in self.quiz_list:
                 self.search_movie_widgets_layout.addWidget(
                     MovieWidget(self.quiz_list, self.btn_start_quiz,
                                 Movie(movie[0], movie[1], movie[2], movie[3].split(","), movie[4], movie[5])))
-
-        # Закрыть подключенную БД
-        db_title.close()
 
         # Если не нашлось ни одного фильма
         if self.search_movie_widgets_layout.count() == 0:
