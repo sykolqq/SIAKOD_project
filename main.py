@@ -51,7 +51,7 @@ class Window(QtWidgets.QMainWindow, ui_main_window.Ui_MainWindow):
 
     def add_movie_widget(self, search_information):
         try:
-            database = open("mini_database_title.txt", encoding="utf-8")
+            database = open("mini_database/title.akas.txt", encoding="utf-8")
             self.data = database.readlines()
         finally:
             database.close()
