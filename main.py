@@ -1,5 +1,6 @@
 import sys  # sys нужен для передачи argv в QApplication
 import time
+import algorithm  # файл с алгоритмом
 
 from PyQt5 import QtWidgets
 
@@ -160,7 +161,7 @@ class Window(QtWidgets.QMainWindow, ui_main_window.Ui_MainWindow):
 
     def show_quiz_results(self):
         # TODO: сделать страницу с результатами
-        list_of_results = self.paired_comparison_algorithm()
+        list_of_results = algorithm.AlgorithmUnits.paired_comparison_algorithm(self.data)
         # Пока тестовый вид
         # Заполнение таблицы данными
         for i, row in enumerate(self.data):
@@ -188,53 +189,6 @@ class Window(QtWidgets.QMainWindow, ui_main_window.Ui_MainWindow):
             table_of_results.setItem(i, 0, item)
 
         self.horizontalLayout.addWidget(table_of_results)
-
-    def paired_comparison_algorithm(self):
-        table = self.data
-        if len(table) == 2:
-            return
-
-        n = len(table)
-
-        # Первый шаг - обработка первой строки матрицы
-        for i in range(2, n):
-            sum_of_cells = (table[0][i - 1] * table[i - 1][i]) if (table[0][i - 1] * table[i - 1][i] < 11) else 11
-            if sum_of_cells > 11:
-                sum_of_cells = 11
-            table[0][i] = round(sum_of_cells, 2)
-            table[i][0] = round(sum_of_cells ** -1, 2)
-
-        # Второй шаг - заполнение пустых ячеек матрицы парных сравнений
-        for i in range(n // 2 + 1):
-            for j in range(n):
-                if table[i][j] != 0:
-                    continue
-                # Код валиден, так как на первом шаге все фильмы сравнились с первым
-                cell_i_j = table[i][0] * table[0][j] if table[i][0] * table[0][j] < 11 else 11
-                cell_j_i = table[j][0] * table[0][i] if table[j][0] * table[0][i] < 11 else 11
-                table[i][j] = round(cell_i_j, 2)
-                table[j][i] = round(cell_j_i, 2)
-
-        # Третий шаг - нормализация данных
-        list_of_row_multi = []
-        sum_of_multiply = 0
-        for i in range(n):
-            multiply = 1
-            for j in range(n):
-                multiply *= table[i][j]
-            multiply = multiply ** (1 / n)
-            list_of_row_multi.append(multiply)
-            sum_of_multiply += multiply
-
-        # Четвертый шаг - результаты каждого фильма
-        list_results = []
-        for i in range(n):
-            list_results.append(list_of_row_multi[i] / sum_of_multiply)
-
-        # Округление результатов
-        for i in range(n):
-            list_results[i] = round(list_results[i], 2)
-        return list_results
 
 
 def main():
