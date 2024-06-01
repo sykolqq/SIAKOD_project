@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ui_quiz_round.ui'
+# Form implementation generated from reading ui file 'quiz_round.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -25,8 +25,7 @@ class Ui_WidgetQuizRound(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label_current_round.sizePolicy().hasHeightForWidth())
         self.label_current_round.setSizePolicy(sizePolicy)
-        self.label_current_round.setStyleSheet("font: 30pt \"Arial\";\n"
-"color: rgb(198, 190, 229);")
+        self.label_current_round.setStyleSheet("font: 30pt \"Arial\";")
         self.label_current_round.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
         self.label_current_round.setObjectName("label_current_round")
         self.main_layout.addWidget(self.label_current_round)
@@ -40,16 +39,14 @@ class Ui_WidgetQuizRound(object):
         self.groupBox_movie1.setSizePolicy(sizePolicy)
         self.groupBox_movie1.setMinimumSize(QtCore.QSize(200, 300))
         self.groupBox_movie1.setStyleSheet("QGroupBox {\n"
-"    /*background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"                                      stop: 0 #CC99FF, stop: 1 #CCCCFF);*/\n"
-"    background: #666;\n"
-"    border: 5px solid #c7bfe6;\n"
-"    border-radius: 0px;\n"
-"}"
-"""
+"    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #CC99FF, stop: 1 #CCCCFF);\n"
+"    border: 2px solid #CC99FF;\n"
+"    border-radius: 10px;\n"
+"}"'''
 QGroupBox QLabel {
     background-color: transparent;
-}'''""")
+}''')
         self.groupBox_movie1.setTitle("")
         self.groupBox_movie1.setObjectName("groupBox_movie1")
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.groupBox_movie1)
@@ -60,8 +57,7 @@ QGroupBox QLabel {
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label_movie1_title.sizePolicy().hasHeightForWidth())
         self.label_movie1_title.setSizePolicy(sizePolicy)
-        self.label_movie1_title.setStyleSheet("font: 20pt \"Arial\";\n"
-"color: rgb(198, 190, 229);")
+        self.label_movie1_title.setStyleSheet("font: 20pt \"Arial\";")
         self.label_movie1_title.setAlignment(QtCore.Qt.AlignCenter)
         self.label_movie1_title.setObjectName("label_movie1_title")
         self.verticalLayout_4.addWidget(self.label_movie1_title)
@@ -70,24 +66,17 @@ QGroupBox QLabel {
         self.layout_movie1_info = QtWidgets.QVBoxLayout()
         self.layout_movie1_info.setObjectName("layout_movie1_info")
         self.label_movie1_producer = QtWidgets.QLabel(self.groupBox_movie1)
-        self.label_movie1_producer.setStyleSheet("color: rgb(198, 190, 229)")
         self.label_movie1_producer.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_movie1_producer.setObjectName("label_movie1_producer")
         self.layout_movie1_info.addWidget(self.label_movie1_producer)
-        self.label_movie1_region = QtWidgets.QLabel(self.groupBox_movie1)
-        self.label_movie1_region.setStyleSheet("color: #c3c3c3;")
-        self.label_movie1_region.setObjectName("label_movie1_region")
-        self.layout_movie1_info.addWidget(self.label_movie1_region, 0, QtCore.Qt.AlignRight)
-        self.label_movie1_rating = QtWidgets.QLabel(self.groupBox_movie1)
-        self.label_movie1_rating.setStyleSheet("color: #FFD700;")
-        self.label_movie1_rating.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.label_movie1_rating.setObjectName("label_movie1_rating")
-        self.layout_movie1_info.addWidget(self.label_movie1_rating)
         self.label_movie1_genre = QtWidgets.QLabel(self.groupBox_movie1)
-        self.label_movie1_genre.setStyleSheet("color: #c3c3c3;")
         self.label_movie1_genre.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_movie1_genre.setObjectName("label_movie1_genre")
         self.layout_movie1_info.addWidget(self.label_movie1_genre)
+        self.label_movie1_rating = QtWidgets.QLabel(self.groupBox_movie1)
+        self.label_movie1_rating.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_movie1_rating.setObjectName("label_movie1_rating")
+        self.layout_movie1_info.addWidget(self.label_movie1_rating)
         self.verticalLayout_4.addLayout(self.layout_movie1_info)
         self.layout_with_groupBoxes.addWidget(self.groupBox_movie1)
         self.groupBox_movie2 = QtWidgets.QGroupBox(WidgetQuizRound)
@@ -98,13 +87,11 @@ QGroupBox QLabel {
         self.groupBox_movie2.setSizePolicy(sizePolicy)
         self.groupBox_movie2.setMinimumSize(QtCore.QSize(200, 300))
         self.groupBox_movie2.setStyleSheet("QGroupBox {\n"
-"    /*background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"                                      stop: 0 #CC99FF, stop: 1 #CCCCFF);*/\n"
-"    background: #666;\n"
-"    border: 5px solid #c7bfe6;\n"
-"    border-radius: 0px;\n"
-"}"
-'''
+"    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #CC99FF, stop: 1 #CCCCFF);\n"
+"    border: 2px solid #CC99FF;\n"
+"    border-radius: 10px;\n"
+"}"'''
 QGroupBox QLabel {
     background-color: transparent;
 }''')
@@ -118,8 +105,7 @@ QGroupBox QLabel {
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.label_movie2_title.sizePolicy().hasHeightForWidth())
         self.label_movie2_title.setSizePolicy(sizePolicy)
-        self.label_movie2_title.setStyleSheet("font: 20pt \"Arial\";\n"
-"color: rgb(198, 190, 229);")
+        self.label_movie2_title.setStyleSheet("font: 20pt \"Arial\";")
         self.label_movie2_title.setAlignment(QtCore.Qt.AlignCenter)
         self.label_movie2_title.setObjectName("label_movie2_title")
         self.verticalLayout_6.addWidget(self.label_movie2_title)
@@ -128,24 +114,18 @@ QGroupBox QLabel {
         self.layout_movie2_ifno = QtWidgets.QVBoxLayout()
         self.layout_movie2_ifno.setObjectName("layout_movie2_ifno")
         self.label_movie2_producer = QtWidgets.QLabel(self.groupBox_movie2)
-        self.label_movie2_producer.setStyleSheet("color: rgb(198, 190, 229);")
         self.label_movie2_producer.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_movie2_producer.setObjectName("label_movie2_producer")
         self.layout_movie2_ifno.addWidget(self.label_movie2_producer)
-        self.label = QtWidgets.QLabel(self.groupBox_movie2)
-        self.label.setStyleSheet("color: #c3c3c3;")
-        self.label.setObjectName("label")
-        self.layout_movie2_ifno.addWidget(self.label, 0, QtCore.Qt.AlignRight)
-        self.label_movie2_rating = QtWidgets.QLabel(self.groupBox_movie2)
-        self.label_movie2_rating.setStyleSheet("color: #FFD700;")
-        self.label_movie2_rating.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.label_movie2_rating.setObjectName("label_movie2_rating")
-        self.layout_movie2_ifno.addWidget(self.label_movie2_rating)
         self.label_movie2_genre = QtWidgets.QLabel(self.groupBox_movie2)
-        self.label_movie2_genre.setStyleSheet("color: #c3c3c3;")
         self.label_movie2_genre.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_movie2_genre.setObjectName("label_movie2_genre")
         self.layout_movie2_ifno.addWidget(self.label_movie2_genre)
+        self.label_movie2_rating = QtWidgets.QLabel(self.groupBox_movie2)
+        self.label_movie2_rating.setStyleSheet("")
+        self.label_movie2_rating.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_movie2_rating.setObjectName("label_movie2_rating")
+        self.layout_movie2_ifno.addWidget(self.label_movie2_rating)
         self.verticalLayout_6.addLayout(self.layout_movie2_ifno)
         self.layout_with_groupBoxes.addWidget(self.groupBox_movie2)
         self.main_layout.addLayout(self.layout_with_groupBoxes)
@@ -171,47 +151,44 @@ QGroupBox QLabel {
         self.slider.setMinimumSize(QtCore.QSize(0, 40))
         self.slider.setStyleSheet("QSlider::groove:horizontal {\n"
 "    height: 5px; \n"
-"    background-color: #c3c3c3;\n"
+"    background-color: #C66CFF;\n"
 "    border-radius: 2px;\n"
 "}\n"
 "\n"
 "QSlider::handle:horizontal {\n"
-"    background: #837f98;\n"
+"    background: #CC99FF;\n"
 "    width: 10px; /* Ширина ползунка */\n"
 "    margin: -15px 0; /* Смещение ползунка */\n"
 "    border-radius: 3px;\n"
 "}\n"
 "QSlider::handle:horizontal:pressed {\n"
-"    background-color: #c6bee3;\n"
+"    background-color: #9966CC;\n"
 "}")
         self.slider.setMaximum(20)
-        self.slider.setPageStep(1)
         self.slider.setProperty("value", 10)
         self.slider.setOrientation(QtCore.Qt.Horizontal)
         self.slider.setObjectName("slider")
         self.layout_which_movie_better.addWidget(self.slider)
         self.layout_percents = QtWidgets.QHBoxLayout()
         self.layout_percents.setObjectName("layout_percents")
-        self.label_left_10 = QtWidgets.QLabel(WidgetQuizRound)
-        self.label_left_10.setObjectName("label_left_10")
-        self.layout_percents.addWidget(self.label_left_10)
+        self.label_left_100 = QtWidgets.QLabel(WidgetQuizRound)
+        self.label_left_100.setObjectName("label_left_100")
+        self.layout_percents.addWidget(self.label_left_100)
         spacerItem4 = QtWidgets.QSpacerItem(5, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.layout_percents.addItem(spacerItem4)
         self.label_center_0 = QtWidgets.QLabel(WidgetQuizRound)
         self.label_center_0.setObjectName("label_center_0")
         self.layout_percents.addWidget(self.label_center_0, 0, QtCore.Qt.AlignHCenter)
-        self.label_right_10 = QtWidgets.QLabel(WidgetQuizRound)
-        self.label_right_10.setObjectName("label_right_10")
-        self.layout_percents.addWidget(self.label_right_10, 0, QtCore.Qt.AlignRight)
+        self.label_right_100 = QtWidgets.QLabel(WidgetQuizRound)
+        self.label_right_100.setObjectName("label_right_100")
+        self.layout_percents.addWidget(self.label_right_100, 0, QtCore.Qt.AlignRight)
         self.layout_which_movie_better.addLayout(self.layout_percents)
         spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.layout_which_movie_better.addItem(spacerItem5)
         self.layout_bottom_part.addLayout(self.layout_which_movie_better)
         self.btn_next_round = QtWidgets.QPushButton(WidgetQuizRound)
         self.btn_next_round.setMinimumSize(QtCore.QSize(120, 50))
-        self.btn_next_round.setStyleSheet("font: 18pt \"Arial\";\n"
-"color: #c1c0c5;\n"
-"background: #5e5b6e;")
+        self.btn_next_round.setStyleSheet("font: 18pt \"Arial\";")
         self.btn_next_round.setObjectName("btn_next_round")
         self.layout_bottom_part.addWidget(self.btn_next_round, 0, QtCore.Qt.AlignBottom)
         self.main_layout.addLayout(self.layout_bottom_part)
@@ -225,19 +202,17 @@ QGroupBox QLabel {
         WidgetQuizRound.setWindowTitle(_translate("WidgetQuizRound", "Form"))
         self.label_current_round.setText(_translate("WidgetQuizRound", "РАУНД 0/N"))
         self.label_movie1_title.setText(_translate("WidgetQuizRound", "Movie1"))
-        self.label_movie1_producer.setText(_translate("WidgetQuizRound", "Режисер:"))
-        self.label_movie1_region.setText(_translate("WidgetQuizRound", "Страна:"))
-        self.label_movie1_rating.setText(_translate("WidgetQuizRound", "Рейтинг:"))
-        self.label_movie1_genre.setText(_translate("WidgetQuizRound", "Жанр:"))
+        self.label_movie1_producer.setText(_translate("WidgetQuizRound", "Режисер: NaN"))
+        self.label_movie1_genre.setText(_translate("WidgetQuizRound", "Жанр: NaN"))
+        self.label_movie1_rating.setText(_translate("WidgetQuizRound", "Рейтинг: NaN"))
         self.label_movie2_title.setText(_translate("WidgetQuizRound", "Movie2"))
-        self.label_movie2_producer.setText(_translate("WidgetQuizRound", "Режисер:"))
-        self.label.setText(_translate("WidgetQuizRound", "Страна:"))
-        self.label_movie2_rating.setText(_translate("WidgetQuizRound", "Рейтинг:"))
-        self.label_movie2_genre.setText(_translate("WidgetQuizRound", "Жанр:"))
+        self.label_movie2_producer.setText(_translate("WidgetQuizRound", "Режисер: NaN"))
+        self.label_movie2_genre.setText(_translate("WidgetQuizRound", "Жанр: NaN"))
+        self.label_movie2_rating.setText(_translate("WidgetQuizRound", "Рейтинг: NaN"))
         self.label_which_movie_better.setText(_translate("WidgetQuizRound", "КАКОЙ ФИЛЬМ ЛУЧШЕ?"))
-        self.label_left_10.setText(_translate("WidgetQuizRound", "10"))
+        self.label_left_100.setText(_translate("WidgetQuizRound", "10"))
         self.label_center_0.setText(_translate("WidgetQuizRound", "Одинаково"))
-        self.label_right_10.setText(_translate("WidgetQuizRound", "10"))
+        self.label_right_100.setText(_translate("WidgetQuizRound", "10"))
         self.btn_next_round.setText(_translate("WidgetQuizRound", "ДАЛЕЕ"))
 
 

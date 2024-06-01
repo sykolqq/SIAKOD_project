@@ -31,5 +31,6 @@ class MovieWidget(QWidget):
         # Активация кнопки "Начать опрос", если количество элементов в списке больше 2
         if not self.btn_start_quiz.isEnabled():
             if len(self.quiz_list) > 1:
-                self.btn_start_quiz.setStyleSheet("color: #FFFFFF")
+                self.btn_start_quiz.setStyleSheet("color: #fff;\n"
+                                                  "background-color: rgb(94, 91, 110);")
                 self.btn_start_quiz.setEnabled(True)
