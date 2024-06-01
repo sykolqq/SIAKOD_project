@@ -14,19 +14,15 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-
-        # Фиксация размера экрана
-        # MainWindow.resize(800, 700)  # - Исходное
-        MainWindow.setFixedSize(800, 700)
-
+        MainWindow.resize(1200, 800)
+        MainWindow.setMinimumSize(QtCore.QSize(1200, 800))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(14)
         MainWindow.setFont(font)
         MainWindow.setStyleSheet("background-color: rgb(51, 51, 51);\n"
-                                 "color: rgb(255, 255, 255);\n"
-                                 "font: 14pt \"Arial\";\n"
-                                 )
+"color: rgb(255, 255, 255);\n"
+"font: 14pt \"Arial\";")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setEnabled(True)
         self.centralwidget.setObjectName("centralwidget")
@@ -35,10 +31,24 @@ class Ui_MainWindow(object):
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
         self.tabWidget.setEnabled(True)
         self.tabWidget.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.tabWidget.setStyleSheet("alignment: center;\n"
+        self.tabWidget.setStyleSheet("QTabBar::tab {\n"
+"    background: #333333;\n"
+"    min-width: 8ex;\n"
+"    padding: 10px 2px 2px 15px;\n"
+"\n"
+"    display: flex;\n"
+"    justify-content: space-between;\n"
+"}\n"
+"\n"
+"QTabBar::tab:hover {\n"
+"    background: #666;\n"
+"}\n"
+"QTabBar::tab:!selected {\n"
+"    margin-top: 2px;\n"
+"}\n"
 "")
         self.tabWidget.setTabPosition(QtWidgets.QTabWidget.South)
-        self.tabWidget.setIconSize(QtCore.QSize(20, 25))
+        self.tabWidget.setIconSize(QtCore.QSize(40, 40))
         self.tabWidget.setDocumentMode(True)
         self.tabWidget.setTabsClosable(False)
         self.tabWidget.setObjectName("tabWidget")
@@ -52,8 +62,8 @@ class Ui_MainWindow(object):
         self.viewed_text_layout.setObjectName("viewed_text_layout")
         self.text_viewed = QtWidgets.QLabel(self.tab_viewed)
         self.text_viewed.setStyleSheet("font: 75 italic 18pt \"Helvetica\";\n"
-"color: rgb(255, 204, 0);\n"
-"border-bottom: 2px solid gray;\n"
+"color: #c5bfe5;\n"
+"border-bottom: 2px solid #c5bfe5;\n"
 "padding-bottom: 10px;")
         self.text_viewed.setObjectName("text_viewed")
         self.viewed_text_layout.addWidget(self.text_viewed)
@@ -62,26 +72,22 @@ class Ui_MainWindow(object):
         self.viewed_scrollArea.setWidgetResizable(True)
         self.viewed_scrollArea.setObjectName("viewed_scrollArea")
         self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 762, 553))
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 762, 532))
         self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
-
-        # Убирает рамку у QScrollArea
-        self.viewed_scrollArea.setFrameStyle(QtWidgets.QFrame.NoFrame)
-
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.scrollAreaWidgetContents_2)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.viewed_movie_widgets_layout = QtWidgets.QVBoxLayout()
         self.viewed_movie_widgets_layout.setObjectName("viewed_movie_widgets_layout")
         self.label_in_process = QtWidgets.QLabel(self.scrollAreaWidgetContents_2)
         self.label_in_process.setStyleSheet("font: 87 30pt \"Arial Black\";\n"
-"color: rgb(150, 150, 150);")
+"color: rgb(112, 109, 130);")
         self.label_in_process.setObjectName("label_in_process")
         self.viewed_movie_widgets_layout.addWidget(self.label_in_process)
         self.horizontalLayout_3.addLayout(self.viewed_movie_widgets_layout)
         self.viewed_scrollArea.setWidget(self.scrollAreaWidgetContents_2)
         self.verticalLayout_2.addWidget(self.viewed_scrollArea)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("icons/favorites.png"), QtGui.QIcon.Selected, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("../movie_application/icons/viewed_icon.png"), QtGui.QIcon.Selected, QtGui.QIcon.Off)
         self.tabWidget.addTab(self.tab_viewed, icon, "")
         self.tab_search = QtWidgets.QWidget()
         self.tab_search.setAutoFillBackground(False)
@@ -99,15 +105,19 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.label_search.sizePolicy().hasHeightForWidth())
         self.label_search.setSizePolicy(sizePolicy)
         self.label_search.setMinimumSize(QtCore.QSize(0, 40))
-        self.label_search.setStyleSheet("border-color: rgb(255, 26, 29);")
+        self.label_search.setStyleSheet("border: 2px solid #c5bfe5;")
         self.label_search.setFrame(True)
-        self.label_search.setPlaceholderText("Введите название фильма...")
         self.label_search.setObjectName("label_search")
         self.search_line_layout.addWidget(self.label_search)
         self.btn_delete = QtWidgets.QPushButton(self.tab_search)
-        self.btn_delete.setMinimumSize(QtCore.QSize(60, 40))
-        self.btn_delete.setStyleSheet("background-color: rgb(85, 85, 85);")
+        self.btn_delete.setMinimumSize(QtCore.QSize(0, 40))
+        self.btn_delete.setStyleSheet("background-color: rgb(94, 91, 110);\n"
+"")
         self.btn_delete.setText("")
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("../movie_application/icons/delete_icon.png"), QtGui.QIcon.Selected, QtGui.QIcon.Off)
+        self.btn_delete.setIcon(icon1)
+        self.btn_delete.setIconSize(QtCore.QSize(40, 20))
         self.btn_delete.setCheckable(False)
         self.btn_delete.setAutoRepeat(False)
         self.btn_delete.setAutoExclusive(False)
@@ -115,16 +125,11 @@ class Ui_MainWindow(object):
         self.btn_delete.setDefault(False)
         self.btn_delete.setFlat(False)
         self.btn_delete.setObjectName("btn_delete")
-
-        # Добавление иконки для кнопки очистки
-        icon_delete = QtGui.QIcon()
-        icon_delete.addPixmap(QtGui.QPixmap("icons/delete.png"), QtGui.QIcon.Selected, QtGui.QIcon.Off)
-        self.btn_delete.setIcon(icon_delete)
-
         self.search_line_layout.addWidget(self.btn_delete)
         self.btn_search = QtWidgets.QPushButton(self.tab_search)
-        self.btn_search.setMinimumSize(QtCore.QSize(0, 40))
-        self.btn_search.setStyleSheet("background-color: rgb(85, 85, 85);")
+        self.btn_search.setMinimumSize(QtCore.QSize(100, 40))
+        self.btn_search.setStyleSheet("background-color: rgb(94, 91, 110);\n"
+"")
         self.btn_search.setCheckable(False)
         self.btn_search.setAutoRepeat(False)
         self.btn_search.setAutoExclusive(False)
@@ -137,42 +142,44 @@ class Ui_MainWindow(object):
         self.search_scrollArea = QtWidgets.QScrollArea(self.tab_search)
         self.search_scrollArea.setWidgetResizable(True)
         self.search_scrollArea.setObjectName("search_scrollArea")
+
         self.search_scrollArea.setStyleSheet("""
-            QScrollBar:vertical {
-                border: 1px solid #999999;
-                background: #f0f0f0;
-                width: 15px;
-                margin: 20px 0 20px 0;
-            }
-            QScrollBar::handle:vertical {
-                background: #99CCFF;
-                min-height: 20px;
-            }
-            QScrollBar::add-line:vertical {
-                background: none;
-            }
-            QScrollBar::sub-line:vertical {
-                background: none;
-            }
-            
-            QScrollBar:horizontal {
-                border: 1px solid #99CCFF;
-                background: #f0f0f0;
-                margin: 0 20px 0 20px;
-            }
-            QScrollBar::handle:horizontal {
-                background: #9900CC;
-                min-height: 20px;
-            }
-            QScrollBar::add-line:horizontal {
-                background: none;
-            }
-            QScrollBar::sub-line:horizontal {
-                background: none;
-            }
-            """)
+                    QScrollBar:vertical {
+                        border: 1px solid #999999;
+                        background: #f0f0f0;
+                        width: 15px;
+                        margin: 20px 0 20px 0;
+                    }
+                    QScrollBar::handle:vertical {
+                        background: #c5bfe5;
+                        min-height: 20px;
+                    }
+                    QScrollBar::add-line:vertical {
+                        background: none;
+                    }
+                    QScrollBar::sub-line:vertical {
+                        background: none;
+                    }
+
+                    QScrollBar:horizontal {
+                        border: 1px solid #99CCFF;
+                        background: #f0f0f0;
+                        margin: 0 20px 0 20px;
+                    }
+                    QScrollBar::handle:horizontal {
+                        background: #c5bfe5;
+                        min-height: 20px;
+                    }
+                    QScrollBar::add-line:horizontal {
+                        background: none;
+                    }
+                    QScrollBar::sub-line:horizontal {
+                        background: none;
+                    }
+                    """)
+
         self.scrollAreaWidgetContents_3 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 762, 518))
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 762, 485))
         self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.scrollAreaWidgetContents_3)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
@@ -181,14 +188,31 @@ class Ui_MainWindow(object):
         self.horizontalLayout_4.addLayout(self.search_movie_widgets_layout)
         self.search_scrollArea.setWidget(self.scrollAreaWidgetContents_3)
         self.verticalLayout.addWidget(self.search_scrollArea)
+        self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_5.setContentsMargins(-1, 0, -1, -1)
+        self.horizontalLayout_5.setObjectName("horizontalLayout_5")
+        self.btn_show_list = QtWidgets.QPushButton(self.tab_search)
+        self.btn_show_list.setEnabled(False)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_show_list.sizePolicy().hasHeightForWidth())
+        self.btn_show_list.setSizePolicy(sizePolicy)
+        self.btn_show_list.setMinimumSize(QtCore.QSize(200, 40))
+        self.btn_show_list.setStyleSheet("background-color: rgb(94, 91, 110);")
+        self.btn_show_list.setObjectName("btn_show_list")
+        self.horizontalLayout_5.addWidget(self.btn_show_list)
         self.btn_start_quiz = QtWidgets.QPushButton(self.tab_search)
         self.btn_start_quiz.setEnabled(False)
-        self.btn_start_quiz.setStyleSheet("background-color: rgb(85, 85, 85);")
+        self.btn_start_quiz.setMinimumSize(QtCore.QSize(0, 40))
+        self.btn_start_quiz.setMaximumSize(QtCore.QSize(800, 16777215))
+        self.btn_start_quiz.setStyleSheet("background-color: rgb(94, 91, 110);")
         self.btn_start_quiz.setObjectName("btn_start_quiz")
-        self.verticalLayout.addWidget(self.btn_start_quiz)
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("icons/search.png"), QtGui.QIcon.Selected, QtGui.QIcon.Off)
-        self.tabWidget.addTab(self.tab_search, icon1, "")
+        self.horizontalLayout_5.addWidget(self.btn_start_quiz)
+        self.verticalLayout.addLayout(self.horizontalLayout_5)
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("../movie_application/icons/search_icon.png"), QtGui.QIcon.Selected, QtGui.QIcon.Off)
+        self.tabWidget.addTab(self.tab_search, icon2, "")
         self.horizontalLayout.addWidget(self.tabWidget)
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -204,7 +228,9 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Movie"))
         self.text_viewed.setText(_translate("MainWindow", "Просмотренное"))
         self.label_in_process.setText(_translate("MainWindow", "В разработке...."))
-        self.btn_search.setText(_translate("MainWindow", "Поиск"))
+        self.label_search.setPlaceholderText(_translate("MainWindow", "Введите название фильма..."))
+        self.btn_search.setText(_translate("MainWindow", "Найти"))
+        self.btn_show_list.setText(_translate("MainWindow", "Показать список"))
         self.btn_start_quiz.setText(_translate("MainWindow", "Начать опрос"))
 
 

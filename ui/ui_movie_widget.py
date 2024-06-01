@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MovieWidget(object):
     def setupUi(self, MovieWidget):
         MovieWidget.setObjectName("MovieWidget")
-        MovieWidget.resize(787, 168)
+        MovieWidget.resize(815, 168)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -24,79 +24,116 @@ class Ui_MovieWidget(object):
         font.setFamily("Arial")
         font.setPointSize(14)
         MovieWidget.setFont(font)
-        self.verticalLayout = QtWidgets.QVBoxLayout(MovieWidget)
-        self.verticalLayout.setObjectName("verticalLayout")
+        MovieWidget.setStyleSheet("")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(MovieWidget)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.groupBox = QtWidgets.QGroupBox(MovieWidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.groupBox.sizePolicy().hasHeightForWidth())
         self.groupBox.setSizePolicy(sizePolicy)
-        self.groupBox.setMinimumSize(QtCore.QSize(0, 130))
-
-        self.groupBox.setStyleSheet("QGroupBox { \n"
-                                    "    border: 2px solid #CCFFFF; \n"
-                                    "    border-radius: 10px; \n"
-                                    "    margin-top: 2ex; \n"
-                                    " } \n"
-                                    "QGroupBox::title { \n"
-                                    "subcontrol-origin: margin;"
-                                    "subcontrol-position: top center;"
-                                    "padding: 0 3px; \n"
-                                    " } ")
-
+        self.groupBox.setMinimumSize(QtCore.QSize(0, 150))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(13)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.groupBox.setFont(font)
+        self.groupBox.setStyleSheet("QGroupBox {\n"
+"    border: 4px solid #c5bfe5;\n"
+"    border-radius: 0px;\n"
+"    margin-top: 2ex;\n"
+" } \n"
+"QGroupBox::title {\n"
+"    \n"
+"    color: #c6bfe5;\n"
+"    subcontrol-origin: margin;\n"
+"    subcontrol-position: top center;\n"
+"} ")
         self.groupBox.setObjectName("groupBox")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.groupBox)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.label_picture = QtWidgets.QLabel(self.groupBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_picture.sizePolicy().hasHeightForWidth())
-        self.label_picture.setSizePolicy(sizePolicy)
-        self.label_picture.setObjectName("label_picture")
-
-        # self.label_picture.setMinimumSize(QtCore.QSize(0, 50))
-
-        self.horizontalLayout.addWidget(self.label_picture)
-        spacerItem = QtWidgets.QSpacerItem(60, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
-        self.label_rating = QtWidgets.QLabel(self.groupBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_rating.sizePolicy().hasHeightForWidth())
-        self.label_rating.setSizePolicy(sizePolicy)
-        self.label_rating.setObjectName("label_rating")
-        self.horizontalLayout.addWidget(self.label_rating)
+        self.vlayout_genres = QtWidgets.QVBoxLayout()
+        self.vlayout_genres.setObjectName("vlayout_genres")
+        self.label_genres = QtWidgets.QLabel(self.groupBox)
+        self.label_genres.setStyleSheet("color: #c3c3c3;")
+        self.label_genres.setObjectName("label_genres")
+        self.vlayout_genres.addWidget(self.label_genres, 0, QtCore.Qt.AlignBottom)
+        self.horizontalLayout.addLayout(self.vlayout_genres)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem1)
+        self.vlayout_info = QtWidgets.QVBoxLayout()
+        self.vlayout_info.setObjectName("vlayout_info")
+        spacerItem2 = QtWidgets.QSpacerItem(20, 50, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.vlayout_info.addItem(spacerItem2)
+        self.label_director = QtWidgets.QLabel(self.groupBox)
+        self.label_director.setStyleSheet("color: rgb(198, 190, 229)")
+        self.label_director.setObjectName("label_director")
+        self.vlayout_info.addWidget(self.label_director)
+        self.label_region = QtWidgets.QLabel(self.groupBox)
+        self.label_region.setStyleSheet("color: #c3c3c3;")
+        self.label_region.setObjectName("label_region")
+        self.vlayout_info.addWidget(self.label_region)
+        self.label_rating = QtWidgets.QLabel(self.groupBox)
+        self.label_rating.setStyleSheet("color: #FFD700;")
+        self.label_rating.setObjectName("label_rating")
+        self.vlayout_info.addWidget(self.label_rating)
+        self.horizontalLayout.addLayout(self.vlayout_info)
+        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem3)
+        self.hlayout_buttons = QtWidgets.QHBoxLayout()
+        self.hlayout_buttons.setSpacing(0)
+        self.hlayout_buttons.setObjectName("hlayout_buttons")
+        self.btn_add_to_viewedList = QtWidgets.QPushButton(self.groupBox)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.btn_add_to_viewedList.sizePolicy().hasHeightForWidth())
+        self.btn_add_to_viewedList.setSizePolicy(sizePolicy)
+        self.btn_add_to_viewedList.setMinimumSize(QtCore.QSize(80, 60))
+        self.btn_add_to_viewedList.setMaximumSize(QtCore.QSize(80, 60))
+        self.btn_add_to_viewedList.setStyleSheet("background-color: rgb(94, 91, 110);")
+        self.btn_add_to_viewedList.setText("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("../movie_application/icons/viewed_icon.png"), QtGui.QIcon.Selected, QtGui.QIcon.Off)
+        self.btn_add_to_viewedList.setIcon(icon)
+        self.btn_add_to_viewedList.setIconSize(QtCore.QSize(30, 30))
+        self.btn_add_to_viewedList.setObjectName("btn_add_to_viewedList")
+        self.hlayout_buttons.addWidget(self.btn_add_to_viewedList)
         self.btn_add_to_quiz = QtWidgets.QPushButton(self.groupBox)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.btn_add_to_quiz.sizePolicy().hasHeightForWidth())
         self.btn_add_to_quiz.setSizePolicy(sizePolicy)
-        self.btn_add_to_quiz.setMinimumSize(QtCore.QSize(40, 40))
+        self.btn_add_to_quiz.setMinimumSize(QtCore.QSize(0, 60))
+
+        self.btn_add_to_quiz.setStyleSheet("background-color: rgb(94, 91, 110);")
         self.btn_add_to_quiz.setObjectName("btn_add_to_quiz")
-        self.horizontalLayout.addWidget(self.btn_add_to_quiz)
-        self.verticalLayout.addWidget(self.groupBox)
+        self.hlayout_buttons.addWidget(self.btn_add_to_quiz)
+        self.horizontalLayout.addLayout(self.hlayout_buttons)
+        self.verticalLayout_2.addWidget(self.groupBox)
+
         self.retranslateUi(MovieWidget)
         QtCore.QMetaObject.connectSlotsByName(MovieWidget)
-
 
     def retranslateUi(self, MovieWidget):
         _translate = QtCore.QCoreApplication.translate
         MovieWidget.setWindowTitle(_translate("MovieWidget", "Form"))
         self.groupBox.setTitle(_translate("MovieWidget", "GroupBox"))
-        self.label_picture.setText(_translate("MovieWidget", "\"КАРТИНКА\""))
-        self.label_rating.setText(_translate("MovieWidget", "\"РЕЙТИНГ\""))
+        self.label_genres.setText(_translate("MovieWidget", "Жанры:"))
+        self.label_director.setText(_translate("MovieWidget", "Режисер:"))
+        self.label_region.setText(_translate("MovieWidget", "Страна:"))
+        self.label_rating.setText(_translate("MovieWidget", "Рейтинг:"))
         self.btn_add_to_quiz.setText(_translate("MovieWidget", "Добавить в опрос"))
 
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     MovieWidget = QtWidgets.QWidget()
     ui = Ui_MovieWidget()
