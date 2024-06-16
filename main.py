@@ -24,7 +24,6 @@ class Window(QtWidgets.QMainWindow, ui.ui_main_window.Ui_MainWindow):
 
         # Стили
         self.btn_start_quiz.setStyleSheet("color: rgb(100, 100, 100)")
-        self.btn_show_list.setStyleSheet("color: rgb(100, 100, 100)")
 
         # Создание списка для опроса
         self.quiz_list = []
@@ -89,7 +88,7 @@ class Window(QtWidgets.QMainWindow, ui.ui_main_window.Ui_MainWindow):
         for movie in search_result:
             if movie[1] not in self.quiz_list:
                 self.search_movie_widgets_layout.addWidget(
-                    MovieWidget(self.quiz_list, self.btn_start_quiz,
+                    MovieWidget(self.quiz_list, self.btn_start_quiz, self.movie_widgets_for_quiz_layout,
                                 Movie(movie[0], movie[1], movie[2], movie[3].split(","), movie[4], movie[5])))
 
         # Если не нашлось ни одного фильма

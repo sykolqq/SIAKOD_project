@@ -52,43 +52,70 @@ class Ui_MainWindow(object):
         self.tabWidget.setDocumentMode(True)
         self.tabWidget.setTabsClosable(False)
         self.tabWidget.setObjectName("tabWidget")
-        self.tab_viewed = QtWidgets.QWidget()
-        self.tab_viewed.setLayoutDirection(QtCore.Qt.RightToLeft)
-        self.tab_viewed.setStyleSheet("")
-        self.tab_viewed.setObjectName("tab_viewed")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.tab_viewed)
+        self.tab_quiz_list = QtWidgets.QWidget()
+        self.tab_quiz_list.setLayoutDirection(QtCore.Qt.RightToLeft)
+        self.tab_quiz_list.setStyleSheet("")
+        self.tab_quiz_list.setObjectName("tab_quiz_list")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.tab_quiz_list)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.viewed_text_layout = QtWidgets.QHBoxLayout()
-        self.viewed_text_layout.setObjectName("viewed_text_layout")
-        self.text_viewed = QtWidgets.QLabel(self.tab_viewed)
-        self.text_viewed.setStyleSheet("font: 75 italic 18pt \"Helvetica\";\n"
+        self.quizlist_text_layout = QtWidgets.QHBoxLayout()
+        self.quizlist_text_layout.setObjectName("quizlist_text_layout")
+        self.text_movie_for_quiz = QtWidgets.QLabel(self.tab_quiz_list)
+        self.text_movie_for_quiz.setStyleSheet("font: 75 italic 18pt \"Helvetica\";\n"
 "color: #c5bfe5;\n"
 "border-bottom: 2px solid #c5bfe5;\n"
 "padding-bottom: 10px;")
-        self.text_viewed.setObjectName("text_viewed")
-        self.viewed_text_layout.addWidget(self.text_viewed)
-        self.verticalLayout_2.addLayout(self.viewed_text_layout)
-        self.viewed_scrollArea = QtWidgets.QScrollArea(self.tab_viewed)
-        self.viewed_scrollArea.setWidgetResizable(True)
-        self.viewed_scrollArea.setObjectName("viewed_scrollArea")
+        self.text_movie_for_quiz.setObjectName("text_movie_for_quiz")
+        self.quizlist_text_layout.addWidget(self.text_movie_for_quiz)
+        self.verticalLayout_2.addLayout(self.quizlist_text_layout)
+        self.movie_widgets_scrollArea = QtWidgets.QScrollArea(self.tab_quiz_list)
+        self.movie_widgets_scrollArea.setStyleSheet("QScrollBar:vertical {\n"
+"                        border: 1px solid #999999;\n"
+"                        background: #f0f0f0;\n"
+"                        width: 15px;\n"
+"                        margin: 20px 0 20px 0;\n"
+"                    }\n"
+"                    QScrollBar::handle:vertical {\n"
+"                        background: #c5bfe5;\n"
+"                        min-height: 20px;\n"
+"                    }\n"
+"                    QScrollBar::add-line:vertical {\n"
+"                        background: none;\n"
+"                    }\n"
+"                    QScrollBar::sub-line:vertical {\n"
+"                        background: none;\n"
+"                    }\n"
+"\n"
+"                    QScrollBar:horizontal {\n"
+"                        border: 1px solid #99CCFF;\n"
+"                        background: #f0f0f0;\n"
+"                        margin: 0 20px 0 20px;\n"
+"                    }\n"
+"                    QScrollBar::handle:horizontal {\n"
+"                        background: #c5bfe5;\n"
+"                        min-height: 20px;\n"
+"                    }\n"
+"                    QScrollBar::add-line:horizontal {\n"
+"                        background: none;\n"
+"                    }\n"
+"                    QScrollBar::sub-line:horizontal {\n"
+"                        background: none;\n"
+"                    }")
+        self.movie_widgets_scrollArea.setWidgetResizable(True)
+        self.movie_widgets_scrollArea.setObjectName("movie_widgets_scrollArea")
         self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 762, 532))
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 1162, 659))
         self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.scrollAreaWidgetContents_2)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.viewed_movie_widgets_layout = QtWidgets.QVBoxLayout()
-        self.viewed_movie_widgets_layout.setObjectName("viewed_movie_widgets_layout")
-        self.label_in_process = QtWidgets.QLabel(self.scrollAreaWidgetContents_2)
-        self.label_in_process.setStyleSheet("font: 87 30pt \"Arial Black\";\n"
-"color: rgb(112, 109, 130);")
-        self.label_in_process.setObjectName("label_in_process")
-        self.viewed_movie_widgets_layout.addWidget(self.label_in_process)
-        self.horizontalLayout_3.addLayout(self.viewed_movie_widgets_layout)
-        self.viewed_scrollArea.setWidget(self.scrollAreaWidgetContents_2)
-        self.verticalLayout_2.addWidget(self.viewed_scrollArea)
+        self.movie_widgets_for_quiz_layout = QtWidgets.QVBoxLayout()
+        self.movie_widgets_for_quiz_layout.setObjectName("movie_widgets_for_quiz_layout")
+        self.horizontalLayout_3.addLayout(self.movie_widgets_for_quiz_layout)
+        self.movie_widgets_scrollArea.setWidget(self.scrollAreaWidgetContents_2)
+        self.verticalLayout_2.addWidget(self.movie_widgets_scrollArea)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("icons/viewed_icon.png"), QtGui.QIcon.Selected, QtGui.QIcon.Off)
-        self.tabWidget.addTab(self.tab_viewed, icon, "")
+        self.tabWidget.addTab(self.tab_quiz_list, icon, "")
         self.tab_search = QtWidgets.QWidget()
         self.tab_search.setAutoFillBackground(False)
         self.tab_search.setObjectName("tab_search")
@@ -140,46 +167,42 @@ class Ui_MainWindow(object):
         self.search_line_layout.addWidget(self.btn_search)
         self.verticalLayout.addLayout(self.search_line_layout)
         self.search_scrollArea = QtWidgets.QScrollArea(self.tab_search)
+        self.search_scrollArea.setStyleSheet("QScrollBar:vertical {\n"
+"                        border: 1px solid #999999;\n"
+"                        background: #f0f0f0;\n"
+"                        width: 15px;\n"
+"                        margin: 20px 0 20px 0;\n"
+"                    }\n"
+"                    QScrollBar::handle:vertical {\n"
+"                        background: #c5bfe5;\n"
+"                        min-height: 20px;\n"
+"                    }\n"
+"                    QScrollBar::add-line:vertical {\n"
+"                        background: none;\n"
+"                    }\n"
+"                    QScrollBar::sub-line:vertical {\n"
+"                        background: none;\n"
+"                    }\n"
+"\n"
+"                    QScrollBar:horizontal {\n"
+"                        border: 1px solid #99CCFF;\n"
+"                        background: #f0f0f0;\n"
+"                        margin: 0 20px 0 20px;\n"
+"                    }\n"
+"                    QScrollBar::handle:horizontal {\n"
+"                        background: #c5bfe5;\n"
+"                        min-height: 20px;\n"
+"                    }\n"
+"                    QScrollBar::add-line:horizontal {\n"
+"                        background: none;\n"
+"                    }\n"
+"                    QScrollBar::sub-line:horizontal {\n"
+"                        background: none;\n"
+"                    }")
         self.search_scrollArea.setWidgetResizable(True)
         self.search_scrollArea.setObjectName("search_scrollArea")
-
-        self.search_scrollArea.setStyleSheet("""
-                    QScrollBar:vertical {
-                        border: 1px solid #999999;
-                        background: #f0f0f0;
-                        width: 15px;
-                        margin: 20px 0 20px 0;
-                    }
-                    QScrollBar::handle:vertical {
-                        background: #c5bfe5;
-                        min-height: 20px;
-                    }
-                    QScrollBar::add-line:vertical {
-                        background: none;
-                    }
-                    QScrollBar::sub-line:vertical {
-                        background: none;
-                    }
-
-                    QScrollBar:horizontal {
-                        border: 1px solid #99CCFF;
-                        background: #f0f0f0;
-                        margin: 0 20px 0 20px;
-                    }
-                    QScrollBar::handle:horizontal {
-                        background: #c5bfe5;
-                        min-height: 20px;
-                    }
-                    QScrollBar::add-line:horizontal {
-                        background: none;
-                    }
-                    QScrollBar::sub-line:horizontal {
-                        background: none;
-                    }
-                    """)
-
         self.scrollAreaWidgetContents_3 = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 762, 485))
+        self.scrollAreaWidgetContents_3.setGeometry(QtCore.QRect(0, 0, 1162, 612))
         self.scrollAreaWidgetContents_3.setObjectName("scrollAreaWidgetContents_3")
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.scrollAreaWidgetContents_3)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
@@ -191,17 +214,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_5.setContentsMargins(-1, 0, -1, -1)
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
-        self.btn_show_list = QtWidgets.QPushButton(self.tab_search)
-        self.btn_show_list.setEnabled(False)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.btn_show_list.sizePolicy().hasHeightForWidth())
-        self.btn_show_list.setSizePolicy(sizePolicy)
-        self.btn_show_list.setMinimumSize(QtCore.QSize(200, 40))
-        self.btn_show_list.setStyleSheet("background-color: rgb(94, 91, 110);")
-        self.btn_show_list.setObjectName("btn_show_list")
-        self.horizontalLayout_5.addWidget(self.btn_show_list)
         self.btn_start_quiz = QtWidgets.QPushButton(self.tab_search)
         self.btn_start_quiz.setEnabled(False)
         self.btn_start_quiz.setMinimumSize(QtCore.QSize(0, 40))
@@ -215,9 +227,6 @@ class Ui_MainWindow(object):
         self.tabWidget.addTab(self.tab_search, icon2, "")
         self.horizontalLayout.addWidget(self.tabWidget)
         MainWindow.setCentralWidget(self.centralwidget)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(1)
@@ -226,11 +235,9 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Movie"))
-        self.text_viewed.setText(_translate("MainWindow", "Просмотренное"))
-        self.label_in_process.setText(_translate("MainWindow", "В разработке...."))
+        self.text_movie_for_quiz.setText(_translate("MainWindow", "Фильмы на опрос"))
         self.label_search.setPlaceholderText(_translate("MainWindow", "Введите название фильма..."))
         self.btn_search.setText(_translate("MainWindow", "Найти"))
-        self.btn_show_list.setText(_translate("MainWindow", "Показать список"))
         self.btn_start_quiz.setText(_translate("MainWindow", "Начать опрос"))
 
 

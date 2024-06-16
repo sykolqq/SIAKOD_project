@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ui_movie_widget.ui'
+# Form implementation generated from reading ui file 'ui_movie_widget_delete.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -56,7 +56,8 @@ class Ui_MovieWidget(object):
 """
 QGroupBox QLabel {
     background-color: transparent;
-}""")
+}"""
+)
         self.groupBox.setObjectName("groupBox")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.groupBox)
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -93,17 +94,17 @@ QGroupBox QLabel {
         self.hlayout_buttons = QtWidgets.QHBoxLayout()
         self.hlayout_buttons.setSpacing(0)
         self.hlayout_buttons.setObjectName("hlayout_buttons")
-        self.btn_add_to_quiz = QtWidgets.QPushButton(self.groupBox)
+        self.btn_delete_from_quiz = QtWidgets.QPushButton(self.groupBox)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.btn_add_to_quiz.sizePolicy().hasHeightForWidth())
-        self.btn_add_to_quiz.setSizePolicy(sizePolicy)
-        self.btn_add_to_quiz.setMinimumSize(QtCore.QSize(0, 60))
-        self.btn_add_to_quiz.setMaximumSize(QtCore.QSize(16777215, 60))
-        self.btn_add_to_quiz.setStyleSheet("background-color: rgb(94, 91, 110);")
-        self.btn_add_to_quiz.setObjectName("btn_add_to_quiz")
-        self.hlayout_buttons.addWidget(self.btn_add_to_quiz)
+        sizePolicy.setHeightForWidth(self.btn_delete_from_quiz.sizePolicy().hasHeightForWidth())
+        self.btn_delete_from_quiz.setSizePolicy(sizePolicy)
+        self.btn_delete_from_quiz.setMinimumSize(QtCore.QSize(0, 60))
+        self.btn_delete_from_quiz.setMaximumSize(QtCore.QSize(16777215, 60))
+        self.btn_delete_from_quiz.setStyleSheet("background-color: rgb(94, 91, 110);")
+        self.btn_delete_from_quiz.setObjectName("btn_delete_from_quiz")
+        self.hlayout_buttons.addWidget(self.btn_delete_from_quiz)
         self.horizontalLayout.addLayout(self.hlayout_buttons)
         self.verticalLayout_2.addWidget(self.groupBox)
 
@@ -118,7 +119,7 @@ QGroupBox QLabel {
         self.label_director.setText(_translate("MovieWidget", "Режисер:"))
         self.label_region.setText(_translate("MovieWidget", "Страна:"))
         self.label_rating.setText(_translate("MovieWidget", "Рейтинг:"))
-        self.btn_add_to_quiz.setText(_translate("MovieWidget", "Добавить в опрос"))
+        self.btn_delete_from_quiz.setText(_translate("MovieWidget", "Удалить из опроса"))
 
 
 if __name__ == "__main__":
