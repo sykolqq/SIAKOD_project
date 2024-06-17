@@ -131,8 +131,7 @@ class Window(QtWidgets.QMainWindow, ui.ui_main_window.Ui_MainWindow):
 
         self.current_member = 0
 
-        list_with_tables_of_members = []
-        self.list_with_tables_of_members = list_with_tables_of_members
+        self.list_with_tables_of_members = []
 
         self.start_quiz_rounds()
 
@@ -140,11 +139,12 @@ class Window(QtWidgets.QMainWindow, ui.ui_main_window.Ui_MainWindow):
         # TODO: ИЗ-ЗА ЭТОГО ЗАВИСАЕТ ПРОГРАММА, ПРИДУМАТЬ КАК СДЕЛАТЬ ЛУЧШЕ
         time.sleep(1)
         self.current_member += 1
+        # Если все участники прошли опрос
         if self.current_member == self.count_of_members + 1:
-            # Прописать функцию
             self.go_to_page_results()
             return
 
+        # Создание таблицы для данного участника
         table_of_member = algorithm.AlgorithmUnits.create_table_for_member(len(self.quiz_list))
         self.current_member_table = table_of_member
 
@@ -159,6 +159,7 @@ class Window(QtWidgets.QMainWindow, ui.ui_main_window.Ui_MainWindow):
         widget_quiz_round = WidgetQuizRound(text_current_round, self.quiz_list[current_round - 1],
                                             self.quiz_list[current_round])
         self.horizontalLayout.addWidget(widget_quiz_round)
+        # С помощью лямбда-выражения передается значение раунда и значение со слайдера
         widget_quiz_round.ui.btn_next_round.clicked.connect(
             lambda: self.quiz_round(current_round + 1, widget_quiz_round.ui.slider.value()))
 
@@ -172,9 +173,11 @@ class Window(QtWidgets.QMainWindow, ui.ui_main_window.Ui_MainWindow):
             value_of_slider = (11 - value_of_slider) if (value_of_slider < 10) else ((value_of_slider - 9) ** -1)
         # ____________________________
 
+        # Заполняются значения матрицы a[i][j] и a[j][i]
         self.current_member_table[current_round - 2][current_round - 1] = round(value_of_slider, 2)
         self.current_member_table[current_round - 1][current_round - 2] = round(value_of_slider ** -1, 2)
 
+        # Если для данного участника закончились фильмы для опроса (он завершил опрос)
         if current_round - 1 == self.count_of_rounds:
             self.list_with_tables_of_members.append(self.current_member_table)
             self.start_quiz_rounds()
@@ -193,7 +196,8 @@ class Window(QtWidgets.QMainWindow, ui.ui_main_window.Ui_MainWindow):
     def go_to_page_results(self):
         self.clear_page()
         self.setWindowTitle("РЕЗУЛЬТАТЫ")
-        # Обрабатывание таблицы
+
+        # Создание таблицы, в которой учитываются результаты всех участников
         table = algorithm.AlgorithmUnits.create_table_with_all_members(self.list_with_tables_of_members)
         list_of_results = algorithm.AlgorithmUnits.paired_comparison_algorithm(table)
         self.show_table_with_result(list_of_results)

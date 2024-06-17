@@ -21,11 +21,10 @@ class MovieWidget(QWidget):
         self.ui.setupUi(self)
 
         self.movie_title = movie.title
-        self.genres = movie.genres
 
         self.ui.groupBox.setTitle(movie.title)
-        self.ui.label_director.setText("Директор: хуйня")
-        # self.ui.label_genres.setText(movie.genres)
+        self.ui.label_director.setText("Директор: " + ', '.join(movie.director))
+
 
         self.ui.btn_add_to_quiz.clicked.connect(self.add_to_quiz)
 
