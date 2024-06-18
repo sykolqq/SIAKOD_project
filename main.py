@@ -20,6 +20,10 @@ from Movie import Movie
 class Window(QtWidgets.QMainWindow, ui.ui_main_window.Ui_MainWindow):
     def __init__(self):
         super().__init__()
+        self.main_window()
+
+    # Этот метод нужен для того, чтобы была возможность вернуться к начальному окну после окончания опроса
+    def main_window(self):
         self.setupUi(self)  # Это нужно для инициализации нашего дизайна
 
         # Мой код
@@ -38,13 +42,6 @@ class Window(QtWidgets.QMainWindow, ui.ui_main_window.Ui_MainWindow):
         self.btn_search.clicked.connect(self.search)
         self.btn_delete.clicked.connect(self.delete_text_in_search_label)
         self.btn_start_quiz.clicked.connect(self.go_to_count_members_page)
-
-        # Инициализация БД
-        # try:
-        #     database = open("mini_database/title.akas.txt", encoding="utf-8")
-        #     self.data = database.readlines()
-        # finally:
-        #     database.close()
 
     def search(self):
         search_information = self.label_search.text()
@@ -218,6 +215,12 @@ class Window(QtWidgets.QMainWindow, ui.ui_main_window.Ui_MainWindow):
             movie_widget.ui.label_place.setText(str(i + 1) + " место")
             movie_widget.ui.label_percents.setText(str(round(list_with_results[i] * 100, 2)) + "%")
             page_result.ui.layout_for_movie_widgets.addWidget(movie_widget)
+
+        # Подключение кнопки "вернуться"
+        page_result.ui.btn_return.clicked.connect(self.return_to_main_window)
+
+    def return_to_main_window(self):
+        self.main_window()
 
 
 def main():
