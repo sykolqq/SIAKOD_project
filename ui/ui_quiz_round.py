@@ -30,9 +30,16 @@ class Ui_WidgetQuizRound(object):
         self.label_current_round.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
         self.label_current_round.setObjectName("label_current_round")
         self.main_layout.addWidget(self.label_current_round)
-        self.layout_with_groupBoxes = QtWidgets.QHBoxLayout()
+        self.layout_with_group_boxes = QtWidgets.QWidget(WidgetQuizRound)
+        self.layout_with_group_boxes.setStyleSheet("#layout_with_group_boxes {\n"
+"    background-color: rgb(46, 46, 46);\n"
+"    border: 5px solid #242424;\n"
+"    padding: 10px;\n"
+"}")
+        self.layout_with_group_boxes.setObjectName("layout_with_group_boxes")
+        self.layout_with_groupBoxes = QtWidgets.QHBoxLayout(self.layout_with_group_boxes)
         self.layout_with_groupBoxes.setObjectName("layout_with_groupBoxes")
-        self.groupBox_movie1 = QtWidgets.QGroupBox(WidgetQuizRound)
+        self.groupBox_movie1 = QtWidgets.QGroupBox(self.layout_with_group_boxes)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -45,11 +52,12 @@ class Ui_WidgetQuizRound(object):
 "    background: #666;\n"
 "    border: 5px solid #c7bfe6;\n"
 "    border-radius: 0px;\n"
-"}"
-"""
-QGroupBox QLabel {
-    background-color: transparent;
-}'''""")
+"    margin-top: 5px;\n"
+"    margin-bottom: 5px;\n"
+"}\n"
+"QGroupBox QLabel {\n"
+"    background: transparent;\n"
+"}")
         self.groupBox_movie1.setTitle("")
         self.groupBox_movie1.setObjectName("groupBox_movie1")
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.groupBox_movie1)
@@ -65,7 +73,7 @@ QGroupBox QLabel {
         self.label_movie1_title.setAlignment(QtCore.Qt.AlignCenter)
         self.label_movie1_title.setObjectName("label_movie1_title")
         self.verticalLayout_4.addWidget(self.label_movie1_title)
-        spacerItem = QtWidgets.QSpacerItem(20, 80, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        spacerItem = QtWidgets.QSpacerItem(20, 70, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.verticalLayout_4.addItem(spacerItem)
         self.layout_movie1_info = QtWidgets.QVBoxLayout()
         self.layout_movie1_info.setObjectName("layout_movie1_info")
@@ -90,7 +98,7 @@ QGroupBox QLabel {
         self.layout_movie1_info.addWidget(self.label_movie1_genre)
         self.verticalLayout_4.addLayout(self.layout_movie1_info)
         self.layout_with_groupBoxes.addWidget(self.groupBox_movie1)
-        self.groupBox_movie2 = QtWidgets.QGroupBox(WidgetQuizRound)
+        self.groupBox_movie2 = QtWidgets.QGroupBox(self.layout_with_group_boxes)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -103,11 +111,12 @@ QGroupBox QLabel {
 "    background: #666;\n"
 "    border: 5px solid #c7bfe6;\n"
 "    border-radius: 0px;\n"
-"}"
-'''
-QGroupBox QLabel {
-    background-color: transparent;
-}''')
+"    margin-top: 5px;\n"
+"    margin-bottom: 5px;\n"
+"}\n"
+"QGroupBox QLabel {\n"
+"    background: transparent;\n"
+"}")
         self.groupBox_movie2.setTitle("")
         self.groupBox_movie2.setObjectName("groupBox_movie2")
         self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.groupBox_movie2)
@@ -148,7 +157,7 @@ QGroupBox QLabel {
         self.layout_movie2_ifno.addWidget(self.label_movie2_genre)
         self.verticalLayout_6.addLayout(self.layout_movie2_ifno)
         self.layout_with_groupBoxes.addWidget(self.groupBox_movie2)
-        self.main_layout.addLayout(self.layout_with_groupBoxes)
+        self.main_layout.addWidget(self.layout_with_group_boxes)
         spacerItem2 = QtWidgets.QSpacerItem(20, 50, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.main_layout.addItem(spacerItem2)
         self.layout_bottom_part = QtWidgets.QHBoxLayout()

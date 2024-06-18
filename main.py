@@ -174,8 +174,8 @@ class Window(QtWidgets.QMainWindow, ui.ui_main_window.Ui_MainWindow):
         # ____________________________
 
         # Заполняются значения матрицы a[i][j] и a[j][i]
-        self.current_member_table[current_round - 2][current_round - 1] = round(value_of_slider, 2)
-        self.current_member_table[current_round - 1][current_round - 2] = round(value_of_slider ** -1, 2)
+        self.current_member_table[current_round - 2][current_round - 1] = value_of_slider
+        self.current_member_table[current_round - 1][current_round - 2] = value_of_slider ** -1
 
         # Если для данного участника закончились фильмы для опроса (он завершил опрос)
         if current_round - 1 == self.count_of_rounds:
@@ -201,6 +201,10 @@ class Window(QtWidgets.QMainWindow, ui.ui_main_window.Ui_MainWindow):
         table = algorithm.AlgorithmUnits.create_table_with_all_members(self.list_with_tables_of_members)
         list_of_results = algorithm.AlgorithmUnits.paired_comparison_algorithm(table)
         self.show_table_with_result(list_of_results)
+
+    def show_page_results(self):
+        self.clear_page()
+        # TODO: доделать страницу
 
     # TODO: переделать в нормальную страницу
     def show_table_with_result(self, list_of_results):

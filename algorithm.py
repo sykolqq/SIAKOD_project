@@ -50,17 +50,17 @@ class AlgorithmUnits:
             table[0][i] = AlgorithmUnits.return_rounded_value_of_element(multi_of_cells)
             table[i][0] = AlgorithmUnits.return_rounded_value_of_element(multi_of_cells_reverse)
 
+        x = 0
+
         # Второй шаг - заполнение пустых ячеек матрицы парных сравнений
-        for i in range(n // 2 + 1):
+        for i in range(n):
             for j in range(n):
+                # Если ячейка уже заполнена:
                 if table[i][j] != 0:
                     continue
                 # Код валиден, так как на первом шаге все фильмы сравнились с первым
-                cell_i_j = table[i][0] * table[0][j]
-                cell_j_i = table[j][0] * table[0][i]
-
-                table[i][j] = AlgorithmUnits.return_rounded_value_of_element(cell_i_j)
-                table[j][i] = AlgorithmUnits.return_rounded_value_of_element(cell_j_i)
+                table[i][j] = table[i][0] * table[0][j]
+                table[j][i] = table[j][0] * table[0][i]
 
     @staticmethod
     def return_rounded_value_of_element(multi_of_cells):
@@ -97,6 +97,6 @@ class AlgorithmUnits:
             list_results.append(list_of_row_multi[i] / sum_of_multiply)
 
         # Округление результатов (нужно, так как у них 15 чисел после запятой)
-        for i in range(n):
-            list_results[i] = round(list_results[i], 2)
+        # for i in range(n):
+        #     list_results[i] = round(list_results[i], 2)
         return list_results

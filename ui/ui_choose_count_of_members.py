@@ -17,65 +17,19 @@ class Ui_Form(object):
         Form.resize(800, 700)
         Form.setStyleSheet("")
         self.gridLayout = QtWidgets.QGridLayout(Form)
+        self.gridLayout.setVerticalSpacing(0)
         self.gridLayout.setObjectName("gridLayout")
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        self.gridLayout.addItem(spacerItem, 1, 0, 1, 1)
-        self.horizontalLayout = QtWidgets.QHBoxLayout()
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        spacerItem1 = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem1)
-        self.label_choose_count_of_members = QtWidgets.QLabel(Form)
-        self.label_choose_count_of_members.setStyleSheet("font: 20pt \"Arial\";\n"
-"color: #c1c0c5;")
-        self.label_choose_count_of_members.setObjectName("label_choose_count_of_members")
-        self.horizontalLayout.addWidget(self.label_choose_count_of_members)
-        self.spinBox_coun_of_members = QtWidgets.QSpinBox(Form)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.spinBox_coun_of_members.sizePolicy().hasHeightForWidth())
-        self.spinBox_coun_of_members.setSizePolicy(sizePolicy)
-        self.spinBox_coun_of_members.setMaximumSize(QtCore.QSize(80, 16777215))
-        self.spinBox_coun_of_members.setStyleSheet("QSpinBox {\n"
-"    color: #c1c0c5;\n"
-"    font: 20pt \"Arial\";\n"
-"    padding-right: 15px; /* make room for the arrows */\n"
-"    border-width: 3;\n"
-"}\n"
-"\n"
-"QSpinBox::up-button {\n"
-"    subcontrol-origin: border;\n"
-"    subcontrol-position: top right; /* position at the top right corner */\n"
-"\n"
-"    width: 16px; /* 16 + 2*1px border-width = 15px padding + 3px parent border */\n"
-"}\n"
-"\n"
-"QSpinBox::up-arrow {\n"
-"    width: 7px;\n"
-"    height: 7px;\n"
-"}\n"
-"\n"
-"QSpinBox::down-button {\n"
-"    subcontrol-origin: border;\n"
-"    subcontrol-position: bottom right; /* position at bottom right corner */\n"
-"    width: 16px;\n"
-"}\n"
-"\n"
-"QSpinBox::down-arrow {\n"
-"    width: 7px;\n"
-"    height: 7px;\n"
-"}\n"
-"")
-        self.spinBox_coun_of_members.setMinimum(1)
-        self.spinBox_coun_of_members.setMaximum(99)
-        self.spinBox_coun_of_members.setObjectName("spinBox_coun_of_members")
-        self.horizontalLayout.addWidget(self.spinBox_coun_of_members)
-        spacerItem2 = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem2)
-        self.gridLayout.addLayout(self.horizontalLayout, 0, 0, 1, 1)
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.btn_next_window = QtWidgets.QPushButton(Form)
+        self.horizontalLayout2 = QtWidgets.QWidget(Form)
+        self.horizontalLayout2.setStyleSheet("#horizontalLayout2 {\n"
+                                             "    background-color: rgb(46, 46, 46);\n"
+                                             "    border: 5px solid #242424;\n"
+                                             "    border-top: 0px;\n"
+
+                                             "}")
+        self.horizontalLayout2.setObjectName("horizontalLayout2")
+        self.horizontal_layout2 = QtWidgets.QHBoxLayout(self.horizontalLayout2)
+        self.horizontal_layout2.setObjectName("horizontal_layout2")
+        self.btn_next_window = QtWidgets.QPushButton(self.horizontalLayout2)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -83,11 +37,76 @@ class Ui_Form(object):
         self.btn_next_window.setSizePolicy(sizePolicy)
         self.btn_next_window.setMinimumSize(QtCore.QSize(300, 0))
         self.btn_next_window.setStyleSheet("font: 20pt \"Arial\";\n"
-"color: #c1c0c5;\n"
-"background: #5e5b6e;")
+                                           "color: #c1c0c5;\n"
+                                           "background: #5e5b6e;")
         self.btn_next_window.setObjectName("btn_next_window")
-        self.horizontalLayout_2.addWidget(self.btn_next_window)
-        self.gridLayout.addLayout(self.horizontalLayout_2, 2, 0, 1, 1)
+        self.horizontal_layout2.addWidget(self.btn_next_window)
+        self.gridLayout.addWidget(self.horizontalLayout2, 1, 0, 1, 1)
+        self.horizontalLayout = QtWidgets.QWidget(Form)
+        self.horizontalLayout.setStyleSheet("#horizontalLayout {\n"
+                                            "    background-color: rgb(46, 46, 46);\n"
+                                            "    border: 5px solid #242424;\n"
+                                            "    border-bottom: 0px;\n"
+
+                                            "}"
+                                            """
+                                            #horizontalLayout QLabel {
+                                                background: transparent;
+                                            }""")
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.horizontal_layout = QtWidgets.QHBoxLayout(self.horizontalLayout)
+        self.horizontal_layout.setObjectName("horizontal_layout")
+        spacerItem = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontal_layout.addItem(spacerItem)
+        self.label_choose_count_of_members = QtWidgets.QLabel(self.horizontalLayout)
+        self.label_choose_count_of_members.setStyleSheet("font: 20pt \"Arial\";\n"
+                                                         "color: #c1c0c5;")
+        self.label_choose_count_of_members.setObjectName("label_choose_count_of_members")
+        self.horizontal_layout.addWidget(self.label_choose_count_of_members)
+        self.spinBox_coun_of_members = QtWidgets.QSpinBox(self.horizontalLayout)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.spinBox_coun_of_members.sizePolicy().hasHeightForWidth())
+        self.spinBox_coun_of_members.setSizePolicy(sizePolicy)
+        self.spinBox_coun_of_members.setMaximumSize(QtCore.QSize(80, 16777215))
+        self.spinBox_coun_of_members.setStyleSheet("QSpinBox {\n"
+                                                   "    color: #c1c0c5;\n"
+                                                   "    font: 20pt \"Arial\";\n"
+                                                   "    padding-right: 15px; /* make room for the arrows */\n"
+                                                   "    border-width: 3;\n"
+                                                   "}\n"
+                                                   "\n"
+                                                   "QSpinBox::up-button {\n"
+                                                   "    subcontrol-origin: border;\n"
+                                                   "    subcontrol-position: top right; /* position at the top right corner */\n"
+                                                   "\n"
+                                                   "    width: 16px; /* 16 + 2*1px border-width = 15px padding + 3px parent border */\n"
+                                                   "}\n"
+                                                   "\n"
+                                                   "QSpinBox::up-arrow {\n"
+                                                   "    width: 7px;\n"
+                                                   "    height: 7px;\n"
+                                                   "}\n"
+                                                   "\n"
+                                                   "QSpinBox::down-button {\n"
+                                                   "    subcontrol-origin: border;\n"
+                                                   "    subcontrol-position: bottom right; /* position at bottom right corner */\n"
+                                                   "    width: 16px;\n"
+                                                   "}\n"
+                                                   "\n"
+                                                   "QSpinBox::down-arrow {\n"
+                                                   "    width: 7px;\n"
+                                                   "    height: 7px;\n"
+                                                   "}\n"
+                                                   "")
+        self.spinBox_coun_of_members.setMinimum(1)
+        self.spinBox_coun_of_members.setMaximum(99)
+        self.spinBox_coun_of_members.setObjectName("spinBox_coun_of_members")
+        self.horizontal_layout.addWidget(self.spinBox_coun_of_members)
+        spacerItem1 = QtWidgets.QSpacerItem(100, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontal_layout.addItem(spacerItem1)
+        self.gridLayout.addWidget(self.horizontalLayout, 0, 0, 1, 1)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -95,12 +114,13 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.label_choose_count_of_members.setText(_translate("Form", "Выберите количество участников:"))
         self.btn_next_window.setText(_translate("Form", "ДАЛЕЕ"))
+        self.label_choose_count_of_members.setText(_translate("Form", "Выберите количество участников:"))
 
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
     ui = Ui_Form()
