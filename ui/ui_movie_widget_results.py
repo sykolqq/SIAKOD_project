@@ -69,7 +69,12 @@ class Ui_MovieWidget_results(object):
 "    color: #c6bfe5;\n"
 "    subcontrol-origin: margin;\n"
 "    subcontrol-position: top center;\n"
-"} ")
+"} "
+"""
+QGroupBox QLabel {
+    background: transparent;
+}
+""")
         self.groupBox_movie.setObjectName("groupBox_movie")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.groupBox_movie)
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -103,6 +108,9 @@ class Ui_MovieWidget_results(object):
         spacerItem3 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem3)
         self.label_percents = QtWidgets.QLabel(self.groupBox_results)
+
+        self.label_percents.setStyleSheet("color: #c5bfe5")
+
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)

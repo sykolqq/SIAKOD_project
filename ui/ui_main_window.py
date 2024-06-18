@@ -114,7 +114,7 @@ class Ui_MainWindow(object):
         self.movie_widgets_scrollArea.setWidget(self.scrollAreaWidgetContents_2)
         self.verticalLayout_2.addWidget(self.movie_widgets_scrollArea)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("icons/viewed_icon.png"), QtGui.QIcon.Selected, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("icons/quiz_list_icon.png"), QtGui.QIcon.Selected, QtGui.QIcon.Off)
         self.tabWidget.addTab(self.tab_quiz_list, icon, "")
         self.tab_search = QtWidgets.QWidget()
         self.tab_search.setAutoFillBackground(False)

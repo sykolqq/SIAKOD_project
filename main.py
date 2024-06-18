@@ -9,6 +9,8 @@ import ui.ui_main_window  # Это наш конвертированный фа�
 from movie_widget import MovieWidget
 from widget_choose_count_of_members import WidgetCountOfMembers
 from widget_quiz_round import WidgetQuizRound
+from widget_page_results import WidgetPageResults
+from movie_widget_results import MovieWidgetResults
 
 import sqlite3
 
@@ -199,33 +201,23 @@ class Window(QtWidgets.QMainWindow, ui.ui_main_window.Ui_MainWindow):
 
         # Создание таблицы, в которой учитываются результаты всех участников
         table = algorithm.AlgorithmUnits.create_table_with_all_members(self.list_with_tables_of_members)
+        # Список, хранящий оценки фильмов (индексы одинаковы)
         list_of_results = algorithm.AlgorithmUnits.paired_comparison_algorithm(table)
-        self.show_table_with_result(list_of_results)
 
-    def show_page_results(self):
+        self.show_page_results(list_of_results)
+
+    def show_page_results(self, list_with_results):
         self.clear_page()
-        # TODO: доделать страницу
+        # Добавление виджета с результатами
+        page_result = WidgetPageResults()
+        self.horizontalLayout.addWidget(page_result)
 
-    # TODO: переделать в нормальную страницу
-    def show_table_with_result(self, list_of_results):
-        table_of_results = QtWidgets.QTableWidget(self)
-        table_of_results.setRowCount(len(self.quiz_list))
-        table_of_results.setColumnCount(1)
-
-        table_of_results.setVerticalHeaderLabels(self.quiz_list)
-        table_of_results.setHorizontalHeaderLabels(["Результат"])
-
-        table_of_results.setStyleSheet(
-            '''QTableView QTableCornerButton::section {
-                    background-color: #ccccff;
-                }'''""
-            "QHeaderView::section { background-color: ""#ccccff; }")
-
-        for i, value in enumerate(list_of_results):
-            item = QtWidgets.QTableWidgetItem(str(value))
-            table_of_results.setItem(i, 0, item)
-
-        self.horizontalLayout.addWidget(table_of_results)
+        # Создание своего виджета для каждого фильма
+        for i in range(len(list_with_results)):
+            movie_widget = MovieWidgetResults(self.quiz_list[i])
+            movie_widget.ui.label_place.setText(str(i + 1) + " место")
+            movie_widget.ui.label_percents.setText(str(round(list_with_results[i] * 100, 2)) + "%")
+            page_result.ui.layout_for_movie_widgets.addWidget(movie_widget)
 
 
 def main():

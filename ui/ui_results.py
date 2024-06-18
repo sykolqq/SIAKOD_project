@@ -23,6 +23,12 @@ class Ui_WidgetResults(object):
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(WidgetResults)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.label_results = QtWidgets.QLabel(WidgetResults)
+
+        self.label_results.setStyleSheet("""
+        color: #c5bfe5;
+        font-size: 30pt;
+        """)
+
         font = QtGui.QFont()
         font.setPointSize(30)
         self.label_results.setFont(font)
@@ -68,9 +74,9 @@ class Ui_WidgetResults(object):
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.verticalLayout_4.addLayout(self.verticalLayout_2)
+        self.layout_for_movie_widgets = QtWidgets.QVBoxLayout()
+        self.layout_for_movie_widgets.setObjectName("layout_for_movie_widgets")
+        self.verticalLayout_4.addLayout(self.layout_for_movie_widgets)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout_3.addWidget(self.scrollArea)
         self.layout_for_btn = QtWidgets.QHBoxLayout()
