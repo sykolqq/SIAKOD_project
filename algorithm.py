@@ -100,3 +100,30 @@ class AlgorithmUnits:
         # for i in range(n):
         #     list_results[i] = round(list_results[i], 2)
         return list_results
+
+    @staticmethod
+    def quicksort(list_results, list_movies, start, end):
+        if end - start > 1:
+            p = AlgorithmUnits.partition(list_results, list_movies, start, end)
+            AlgorithmUnits.quicksort(list_results, list_movies, start, p)
+            AlgorithmUnits.quicksort(list_results, list_movies, p + 1, end)
+
+    @staticmethod
+    def partition(list_results, list_movies, start, end):
+        pivot = list_results[start]
+        i = start + 1
+        j = end - 1
+
+        while True:
+            while (i <= j and list_results[i] <= pivot):
+                i = i + 1
+            while (i <= j and list_results[j] >= pivot):
+                j = j - 1
+
+            if i <= j:
+                list_results[i], list_results[j] = list_results[j], list_results[i]
+                list_movies[i], list_movies[j] = list_movies[j], list_movies[i]
+            else:
+                list_results[start], list_results[j] = list_results[j], list_results[start]
+                list_movies[start], list_movies[j] = list_movies[j], list_movies[start]
+                return j

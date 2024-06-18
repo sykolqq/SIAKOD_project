@@ -209,6 +209,11 @@ class Window(QtWidgets.QMainWindow, ui.ui_main_window.Ui_MainWindow):
         page_result = WidgetPageResults()
         self.horizontalLayout.addWidget(page_result)
 
+        # Сортировка фильмов в соответствии с их коэффициентами
+        algorithm.AlgorithmUnits.quicksort(list_with_results, self.quiz_list, 0, len(list_with_results))
+        self.quiz_list.reverse()
+        list_with_results.reverse()
+
         # Создание своего виджета для каждого фильма
         for i in range(len(list_with_results)):
             movie_widget = MovieWidgetResults(self.quiz_list[i])
@@ -216,11 +221,8 @@ class Window(QtWidgets.QMainWindow, ui.ui_main_window.Ui_MainWindow):
             movie_widget.ui.label_percents.setText(str(round(list_with_results[i] * 100, 2)) + "%")
             page_result.ui.layout_for_movie_widgets.addWidget(movie_widget)
 
-        # Подключение кнопки "вернуться"
-        page_result.ui.btn_return.clicked.connect(self.return_to_main_window)
-
-    def return_to_main_window(self):
-        self.main_window()
+        # Подключение к кнопке возврат к начальному экрану
+        page_result.ui.btn_return.clicked.connect(self.main_window)
 
 
 def main():
