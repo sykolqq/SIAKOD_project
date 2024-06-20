@@ -82,6 +82,7 @@ class Window(QtWidgets.QMainWindow, ui.ui_main_window.Ui_MainWindow):
         search_result = db_title_cursor.fetchall()
 
         # Закрыть подключенную БД
+        db_title_cursor.close()
         db_title.close()
 
         for movie in search_result:
