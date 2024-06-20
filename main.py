@@ -136,7 +136,7 @@ class Window(QtWidgets.QMainWindow, ui.ui_main_window.Ui_MainWindow):
 
     def start_quiz_rounds(self):
         # TODO: ИЗ-ЗА ЭТОГО ЗАВИСАЕТ ПРОГРАММА, ПРИДУМАТЬ КАК СДЕЛАТЬ ЛУЧШЕ
-        time.sleep(1)
+        time.sleep(0.2)
         self.current_member += 1
         # Если все участники прошли опрос
         if self.current_member == self.count_of_members + 1:

@@ -17,19 +17,25 @@ class MovieWidgetDelete(QWidget):
         super(MovieWidgetDelete, self).__init__(parent)
         self.ui = Ui_MovieWidget()
         self.ui.setupUi(self)
-
-        self.movie_title = movie.title
-        self.genres = movie.genres
+        self.movie = movie
 
         self.ui.groupBox.setTitle(movie.title)
-        self.ui.label_director.setText("Директор: хуйня")
+        # Жанры
+        self.ui.label_genres.setText("Жанры: " + ', '.join(movie.director))
+        # Директор (надо исправить)
+        self.ui.label_director.setText("Директор: " + "NaN")
+        # self.ui.label_director.setText("Директор: " + movie.rating)
+        # Регион
+        self.ui.label_region.setText("Страна: " + movie.region)
+        # Рейтинг
+        self.ui.label_rating.setText("Рейтинг: " + str(movie.genres))
 
         self.ui.btn_delete_from_quiz.clicked.connect(self.delete_from_quiz)
 
     def delete_from_quiz(self):
         # TODO: удалять не название фильма, а все данные про этот фильм
-        index = self.quiz_list.index(self.movie_title)
-        self.quiz_list.remove(self.movie_title)
+        index = self.quiz_list.index(self.movie)
+        self.quiz_list.remove(self.movie)
 
         # Удаление элемента со страницы
         item = self.movie_widgets_for_quiz_layout.takeAt(index)

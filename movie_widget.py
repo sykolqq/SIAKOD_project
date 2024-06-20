@@ -23,14 +23,21 @@ class MovieWidget(QWidget):
         self.movie_title = movie.title
 
         self.ui.groupBox.setTitle(movie.title)
-        self.ui.label_director.setText("Директор: " + ', '.join(movie.director))
-
+        # Жанры
+        self.ui.label_genres.setText("Жанры: " + ', '.join(movie.director))
+        # Директор (Надо исправить)
+        self.ui.label_director.setText("Директор: " + "NaN")
+        # self.ui.label_director.setText("Директор: " + movie.rating)
+        # Регион
+        self.ui.label_region.setText("Страна: " + movie.region)
+        # Рейтинг
+        self.ui.label_rating.setText("Рейтинг: " + str(movie.genres))
 
         self.ui.btn_add_to_quiz.clicked.connect(self.add_to_quiz)
 
     def add_to_quiz(self):
         # TODO: добавлять не название фильма, а все данные про этот фильм
-        self.quiz_list.append(self.movie_title)
+        self.quiz_list.append(self.movie)
 
         # Отрисовка данного фильма во второй вкладке
         self.movie_widgets_for_quiz_layout.addWidget(
