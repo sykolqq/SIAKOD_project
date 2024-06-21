@@ -10,9 +10,6 @@ IP = '127.0.0.1'
 PORT = 65432
 CHUNK_SIZE = 4096
 
-# Словарь для хранения групп пользователей
-groups = {}
-
 
 def search_movies(search_information):
     # Подключение к БД

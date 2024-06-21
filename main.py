@@ -36,8 +36,6 @@ class Window(QtWidgets.QMainWindow, ui.ui_main_window.Ui_MainWindow):
     def main_window(self):
         self.setupUi(self)  # Это нужно для инициализации нашего дизайна
 
-        # Мой код
-
         # Стили
         self.btn_start_quiz.setStyleSheet("color: rgb(100, 100, 100)")
 
@@ -66,34 +64,6 @@ class Window(QtWidgets.QMainWindow, ui.ui_main_window.Ui_MainWindow):
         self.label_search.setText("")
 
     def add_movie_widget(self, search_information):
-        # # Подключение к БД
-        # db_title = sqlite3.connect("mini_database/title.db")
-        # db_title_cursor = db_title.cursor()
-        #
-        # # Поиск по названию
-        # db_title_cursor.execute(f'''
-        # SELECT
-        # 	akas.titleId,
-        # 	akas.title,
-        # 	akas.region,
-        # 	basics.genres,
-        # 	crew.directors,
-        # 	ratings.averageRating
-        # FROM
-        # 	title_akas akas
-        # JOIN
-        # 	title_basics basics ON akas.titleId = basics.titleId,
-        # 	title_crew crew ON akas.titleId = crew.titleId,
-        # 	title_ratings ratings ON akas.titleId = ratings.titleId
-        # WHERE
-        # 	akas.title LIKE '%{search_information}%'
-        # ''')
-        # search_result = db_title_cursor.fetchall()
-        #
-        # # Закрыть подключенную БД
-        # db_title_cursor.close()
-        # db_title.close()
-
         client.send(search_information.encode('utf-8'))
 
         data = b''
@@ -104,9 +74,6 @@ class Window(QtWidgets.QMainWindow, ui.ui_main_window.Ui_MainWindow):
             data += chunk
 
         search_result = json.loads(data.decode('utf-8'))
-
-        # received_data = client.recv(4096)
-        # search_result = json.loads(received_data.decode('utf-8'))
 
         for movie in search_result:
             if movie[1] not in self.quiz_list:
@@ -159,8 +126,6 @@ class Window(QtWidgets.QMainWindow, ui.ui_main_window.Ui_MainWindow):
         self.start_quiz_rounds()
 
     def start_quiz_rounds(self):
-        # TODO: ИЗ-ЗА ЭТОГО ЗАВИСАЕТ ПРОГРАММА, ПРИДУМАТЬ КАК СДЕЛАТЬ ЛУЧШЕ
-        time.sleep(0.2)
         self.current_member += 1
         # Если все участники прошли опрос
         if self.current_member == self.count_of_members + 1:
