@@ -13,8 +13,18 @@ from widget_page_results import WidgetPageResults
 from movie_widget_results import MovieWidgetResults
 
 import sqlite3
+import json
 
 from Movie import Movie
+from socket import *
+
+# Настройки клиента
+IP = '127.0.0.1'
+PORT = 65432
+CHUNK_SIZE = 4096
+
+client = socket(AF_INET, SOCK_STREAM)
+client.connect((IP, PORT))
 
 
 class Window(QtWidgets.QMainWindow, ui.ui_main_window.Ui_MainWindow):
@@ -49,7 +59,6 @@ class Window(QtWidgets.QMainWindow, ui.ui_main_window.Ui_MainWindow):
         if search_information != "":
             self.clear_search_scroll_area()
             if len(search_information) > 30:
-                # TODO: Поменять на 62 или 50
                 search_information = search_information[:30] + "..."
             self.add_movie_widget(search_information)
 
@@ -57,33 +66,47 @@ class Window(QtWidgets.QMainWindow, ui.ui_main_window.Ui_MainWindow):
         self.label_search.setText("")
 
     def add_movie_widget(self, search_information):
-        # Подключение к БД
-        db_title = sqlite3.connect("mini_database/title.db")
-        db_title_cursor = db_title.cursor()
+        # # Подключение к БД
+        # db_title = sqlite3.connect("mini_database/title.db")
+        # db_title_cursor = db_title.cursor()
+        #
+        # # Поиск по названию
+        # db_title_cursor.execute(f'''
+        # SELECT
+        # 	akas.titleId,
+        # 	akas.title,
+        # 	akas.region,
+        # 	basics.genres,
+        # 	crew.directors,
+        # 	ratings.averageRating
+        # FROM
+        # 	title_akas akas
+        # JOIN
+        # 	title_basics basics ON akas.titleId = basics.titleId,
+        # 	title_crew crew ON akas.titleId = crew.titleId,
+        # 	title_ratings ratings ON akas.titleId = ratings.titleId
+        # WHERE
+        # 	akas.title LIKE '%{search_information}%'
+        # ''')
+        # search_result = db_title_cursor.fetchall()
+        #
+        # # Закрыть подключенную БД
+        # db_title_cursor.close()
+        # db_title.close()
 
-        # Поиск по названию
-        db_title_cursor.execute(f'''
-        SELECT
-        	akas.titleId,
-        	akas.title,
-        	akas.region,
-        	basics.genres,
-        	crew.directors,
-        	ratings.averageRating
-        FROM
-        	title_akas akas
-        JOIN
-        	title_basics basics ON akas.titleId = basics.titleId,
-        	title_crew crew ON akas.titleId = crew.titleId,
-        	title_ratings ratings ON akas.titleId = ratings.titleId
-        WHERE
-        	akas.title LIKE '%{search_information}%'
-        ''')
-        search_result = db_title_cursor.fetchall()
+        client.send(search_information.encode('utf-8'))
 
-        # Закрыть подключенную БД
-        db_title_cursor.close()
-        db_title.close()
+        data = b''
+        while True:
+            chunk = client.recv(CHUNK_SIZE)
+            if b'END_OF_DATA' in chunk:
+                break
+            data += chunk
+
+        search_result = json.loads(data.decode('utf-8'))
+
+        # received_data = client.recv(4096)
+        # search_result = json.loads(received_data.decode('utf-8'))
 
         for movie in search_result:
             if movie[1] not in self.quiz_list:
